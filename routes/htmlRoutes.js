@@ -25,3 +25,11 @@ module.exports = function(app) {
     res.render("404");
   });
 };
+
+// ======================================================
+
+/**
+ * === we will need these post routes ===
+ * get "/signup" - for the "signup" page
+ * get "/login" - for the "login" page
+ */
