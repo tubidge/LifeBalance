@@ -9,8 +9,7 @@ module.exports = function (sequelize, DataTypes) {
         },
     });
     Task.associate = function (models) {
-        // We're saying that a Task should belong to an Author
-        // A Task can't be created without an Author due to the foreign key constraint
+
         Task.belongsTo(models.User, models.Selection, {
             foreignKey: {
                 allowNull: false

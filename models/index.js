@@ -8,6 +8,13 @@ var env = process.env.NODE_ENV || "development";
 var config = require(__dirname + "/../config/config.json")[env];
 var db = {};
 
+db.User = sequelize.import(__dirname + "/models/user.js")
+db.Selection = sequelize.import(__dirname + "/models/selection.js");
+db.Task = sequelize.import(__dirname + "/models/task.js");
+
+db.Selection.associate(db);
+db.Task.associate(db);
+
 if (config.use_env_variable) {
   var sequelize = new Sequelize(process.env[config.use_env_variable]);
 } else {
