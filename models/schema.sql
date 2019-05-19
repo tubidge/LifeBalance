@@ -1,5 +1,3 @@
-DROP DATABASE IF EXISTS exampledb;
-CREATE DATABASE exampledb;
+DROP DATABASE IF EXISTS lifebalancedb;
+CREATE DATABASE lifebalancedb;
 
-DROP DATABASE IF EXISTS testdb;
-CREATE DATABASE testdb;
