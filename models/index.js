@@ -8,6 +8,13 @@ var env = process.env.NODE_ENV || "development";
 var config = require(__dirname + "/../config/config.json")[env];
 var db = {};
 
+// db.User = sequelize.import(__dirname + "/user.js")
+// db.Selection = sequelize.import(__dirname + "/selection.js");
+// db.Task = sequelize.import(__dirname + "/task.js");
+
+// db.Selection.associate(db);
+// db.Task.associate(db);
+
 if (config.use_env_variable) {
   var sequelize = new Sequelize(process.env[config.use_env_variable]);
 } else {
@@ -38,5 +45,14 @@ Object.keys(db).forEach(function (modelName) {
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+
+console.log("log:" + path.join(__dirname + "/user.js"));
+
+db.User = sequelize.import(__dirname + "/user.js");
+db.Selection = sequelize.import(__dirname + "/selection.js");
+db.Task = sequelize.import(__dirname + "/task.js");
+
+db.Selection.associate(db);
+db.Task.associate(db);
 
 module.exports = db;
