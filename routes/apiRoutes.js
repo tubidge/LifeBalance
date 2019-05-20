@@ -22,3 +22,20 @@ module.exports = function(app) {
     });
   });
 };
+
+// ======================================================
+
+/**
+* === we will need ===
+* "/api/todos" to get todos on page load
+*/
+
+/**
+ *  === we will need this put route ===
+ * "/api/todos" + id
+ */
+
+/**
+ *  === we will need this delete route ===
+ *  "/api/todos/" + id
+ */
