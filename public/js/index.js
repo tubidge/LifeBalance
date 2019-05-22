@@ -40,3 +40,12 @@
 *  === we will need this delete route ===
 *  "/api/todos/" + id
 */
+
+// $.ajax("/", {
+//   type: "GET"
+// }).then(
+//   function () {
+//     console.log("workd");
+//     location.reload();
+//   }
+// );
