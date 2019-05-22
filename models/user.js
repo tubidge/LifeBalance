@@ -10,9 +10,6 @@ module.exports = function (sequelize, DataTypes) {
     User.hasMany(models.Task, {
       onDelete: "cascade"
     });
-    User.hasMany(models.Task, {
-      onDelete: "cascade"
-    });
 
   };
 

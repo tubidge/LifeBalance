@@ -21,6 +21,27 @@ module.exports = function (app) {
       res.json(dbExample);
     });
   });
+
+  // app.post("/api/todos", function (req, res) {
+  //   console.log(req.body);
+  //   db.Selection.create(req.body).then(function (dbExample) {
+  //     console.log(req.body);
+
+  //     res.json(dbExample);
+  //   });
+  // });
+
+
+  app.post("/api/todos", function (req, res) {
+    console.log(req.body);
+    db.Task.create(req.body).then(function (dbExample) {
+      console.log(req.body);
+
+      res.json(dbExample);
+    });
+  });
+
+
 };
 
 // ======================================================

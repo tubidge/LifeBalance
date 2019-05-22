@@ -21,17 +21,31 @@ module.exports = function (app) {
   });
 
   app.get("/", function (req, res) {
-    res.render("index");
-    // db.Tasks.findAll({}).then(function (tasksData) {
-    //   res.render("index", {
-    //     data: tasksData
-    //   });
-    // });
+
+    db.Selection.findAll({
+      include: [db.Task]
+    }).then(function (data) {
+      res.render("index", {
+        Selection: data
+      });
+
+    });
   });
   app.get("/signup", function (req, res) {
     res.render("signup");
 
   });
+
+  app.post("/signup", function (req, res) {
+    console.log(req.body);
+
+    db.User.create(req.body).then(function (userData) {
+      res.json(userData);
+      console.log(userData);
+
+    });
+  });
+
   app.get("/login", function (req, res) {
     res.render("login");
 

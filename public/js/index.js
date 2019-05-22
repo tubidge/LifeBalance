@@ -8,8 +8,10 @@
 // jQuery for signup page
 $("#signup-form").on("submit", function (event) {
   event.preventDefault();
+
+
   var newUser = {
-    username: $("input[name='username']").val().trim(),
+    User: $("input[name='username']").val().trim(),
     password: $("input[name='password']").val().trim()
   };
   console.log(newUser);
@@ -26,12 +28,27 @@ $("#signup-form").on("submit", function (event) {
 // jQuery for new task
 $("#new-task").on("submit", function (event) {
   event.preventDefault();
+
+
+  var data = {
+    task: $("input[name='todo']").val().trim(),
+    SelectionId: 1,
+    UserId: 1
+  };
+
+
+  // var data = {
+  //   category: $("input[name='todo']").val().trim()
+  // };
+
+
   // making ajax request with new task data
   $.ajax({
     url: "/api/todos",
     method: "POST",
-    data: $("input[name='task']").val().trim()
+    data: data
   }).then(function () {
+    // console.log(data);
     console.log("Added new task");
   });
 });
