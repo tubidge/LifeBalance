@@ -22,15 +22,7 @@ module.exports = function (app) {
     });
   });
 
-  // app.post("/api/todos", function (req, res) {
-  //   console.log(req.body);
-  //   db.Selection.create(req.body).then(function (dbExample) {
-  //     console.log(req.body);
-
-  //     res.json(dbExample);
-  //   });
-  // });
-
+  // =====================================================
 
   app.post("/api/todos", function (req, res) {
     console.log(req.body);
@@ -41,13 +33,13 @@ module.exports = function (app) {
     });
   });
 
-
+  // ======================================================
+  
 };
 
-// ======================================================
 
 /**
-* === we will need ===
+* === we will need === DONE
 * "/api/todos" to get todos on page load
 */
 

@@ -39,6 +39,5 @@ db.Task = sequelize.import(__dirname + "/task.js");
 
 db.Selection.associate(db);
 db.Task.associate(db);
-// db.User.associate(db);
 
 module.exports = db;
