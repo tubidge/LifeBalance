@@ -60,7 +60,7 @@ module.exports = function (sequelize, DataTypes) {
   Selection.associate = function (models) {
     // We're saying that a Selection should belong to an Author
     // A Selection can't be created without an Author due to the foreign key constraint
-    Selection.belongsTo(models.User, {
+    Selection.hasMany(models.Task, {
       foreignKey: {
         allowNull: false
       }
