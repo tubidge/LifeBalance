@@ -15,6 +15,11 @@ module.exports = function (sequelize, DataTypes) {
         allowNull: false
       }
     });
+    Task.belongsTo(models.Selection, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
   };
 
   return Task;

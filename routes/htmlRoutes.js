@@ -22,15 +22,22 @@ module.exports = function (app) {
 
   app.get("/", function (req, res) {
 
-    db.Selection.findAll({
-      include: [db.Task]
-    }).then(function (data) {
-      res.render("index", {
-        Selection: data
-      });
+    db.Selection.findAll({})
+      .then(function (dataSelect) {
 
-    });
+        db.Task.findAll({})
+          .then(function (dataTasks) {
+
+          var viewObj = {
+            Selection: dataSelect,
+            Tasks: dataTasks
+          };
+          res.render("index", viewObj);
+
+        });
+      });
   });
+
   app.get("/signup", function (req, res) {
     res.render("signup");
 
