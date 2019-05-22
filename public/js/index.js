@@ -30,7 +30,7 @@ $("#new-task").on("submit", function (event) {
   $.ajax({
     url: "/api/todos",
     method: "POST",
-    data: $("input[name='task']").val().trim();
+    data: $("input[name='task']").val().trim()
   }).then(function () {
     console.log("Added new task");
   });
