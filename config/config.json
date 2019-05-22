@@ -8,7 +8,7 @@
   },
   "test": {
     "username": "root",
-    "password": "root",
+    "password": null,
     "database": "lifebalancedb",
     "host": "localhost",
     "dialect": "mysql",
