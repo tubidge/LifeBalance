@@ -1,0 +1,39 @@
+{{!-- card --}}
+{{!-- example --}}
+<div class="card">
+  <h5>{{category}}</h5>
+
+  <div>
+    <ul>
+
+      <li data-complete="{{complete}}" data-category="{{category}}" data-id="{{id}}">
+        <label for="{{id}}"><input type="checkbox" name="{{id}}"></label>
+      </li>
+
+    </ul>
+  </div>
+
+  <button class="btn btn-primary" data-category="{{category}}" data-toggle="modal"
+    data-target="#new-task-modal">add</button>
+</div>
+{{!-- end card --}}
+
+{{!-- modal --}}
+{{!-- example --}}
+<div class="modal-content">
+
+  <div class="modal-header">
+    <h5 class="modal-title">New Task in {{category}}</h5>
+  </div>
+  <div class="modal-body">
+
+    <form id="new-task">
+      <input class="form-control" type="text" name="username" placeholder="New Task"> <br>
+      <button type="submit" class="btn btn-primary">Add</button>
+    </form>
+
+  </div>
+
+</div>
+
+{{!-- end modal --}}
