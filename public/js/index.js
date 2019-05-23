@@ -8,8 +8,10 @@
 // jQuery for signup page
 $("#signup-form").on("submit", function (event) {
   event.preventDefault();
+
+
   var newUser = {
-    username: $("input[name='username']").val().trim(),
+    User: $("input[name='username']").val().trim(),
     password: $("input[name='password']").val().trim()
   };
   console.log(newUser);
@@ -24,17 +26,35 @@ $("#signup-form").on("submit", function (event) {
 });
 
 // jQuery for new task
-$("#new-task").on("submit", function (event) {
-  event.preventDefault();
-  // making ajax request with new task data
-  $.ajax({
-    url: "/api/todos",
-    method: "POST",
-    data: $("input[name='task']").val().trim()
-  }).then(function () {
-    console.log("Added new task");
-  });
+$(".new-task").keydown(function (event) {
+
+  if (event.which === 13) {
+    event.preventDefault();
+    console.log("wrkd");
+
+    $(".new-task").submit();
+
+    var data = {
+      task: $(".new-task").val().trim(),
+      SelectionId: 1,
+      UserId: 1
+    };
+
+    // making ajax request with new task data
+    $.ajax({
+      url: "/api/todos",
+      method: "POST",
+      data: data
+    }).then(function () {
+      // console.log(data);
+      console.log("Added new task");
+    });
+
+    $(".add-todo-item").hide();
+    $(".new-task").val("");
+  }
 });
+
 /**
 *
 * The forms are set up to use: $("#signup input[name=username-or-whatever]")
@@ -70,3 +90,12 @@ $("#new-task").on("submit", function (event) {
 *  === we will need this delete route ===
 *  "/api/todos/" + id
 */
+
+// $.ajax("/", {
+//   type: "GET"
+// }).then(
+//   function () {
+//     console.log("workd");
+//     location.reload();
+//   }
+// );

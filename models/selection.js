@@ -1,60 +1,13 @@
 
 module.exports = function (sequelize, DataTypes) {
   var Selection = sequelize.define("Selection", {
-    education: {
+    category: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
         len: [1]
       }
-    },
-    family: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-      len: [1]
-    },
-    finances: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [1]
-      }
-    },
-    hobbies: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [1]
-      }
-    },
-    healthiness: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [1]
-      }
-    },
-    home: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [1]
-      }
-    },
-    social: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [1]
-      }
-    },
-    work: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [1]
-      }
-    },
+    }
   });
 
   Selection.associate = function (models) {
