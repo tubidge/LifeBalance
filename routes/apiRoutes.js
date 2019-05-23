@@ -1,5 +1,6 @@
 var db = require("../models");
 
+
 module.exports = function(app) {
   // Get all examples
   app.get("/api/examples", function(req, res) {
@@ -21,21 +22,34 @@ module.exports = function(app) {
       res.json(dbExample);
     });
   });
+
+  // ======================================================
+  //  === we will need ===
+  // "/api/todos" to get todos on page load
+  app.get("/api/todos", function(req, res){
+    db.ToDo.findAll({}).then(function(data){
+      res.json(data);
+    });
+  });
+
+  app.post("/api/todos", function(req, res){
+    db.ToDo.create(req.body).then(function(data){
+      res.json(data);
+    });
+  });
+  
+  // === we will need this put route ===
+  // "/api/todos" + id
+  app.put("/api/todos" + id, function(req, res){
+    // what is it updating? the todo completeion status?
+    // db.ToDo.update({})
+  });
+
+  // === we will need this delete route ===
+  // "/api/todos/" + id
+  app.delete("/api/todos/" + id, function(req, res){
+    db.ToDo.destroy({ where: { id: req.params.id }}).then(function(data){
+      res.json(data);
+    });
+  });
 };
-
-// ======================================================
-
-/**
-* === we will need ===
-* "/api/todos" to get todos on page load
-*/
-
-/**
- *  === we will need this put route ===
- * "/api/todos" + id
- */
-
-/**
- *  === we will need this delete route ===
- *  "/api/todos/" + id
- */

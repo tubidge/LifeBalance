@@ -24,13 +24,19 @@ module.exports = function (app) {
   app.get("*", function (req, res) {
     res.render("404");
   });
+
+  // ======================================================
+
+  // === we will need these post routes ===
+  // get "/signup" - for the "signup" page
+  // 
+  app.get("/signup", function(req, res){
+    res.render("signup");
+  });
+
+  // get "/login" - for the "login" page
+  app.get("/login", function(req, res){
+    res.render("login");
+  });
+
 };
-
-// ======================================================
-
-/**
- * === we will need these post routes ===
- * get "/signup" - for the "signup" page
- * get "/login" - for the "login" page
- */
-
