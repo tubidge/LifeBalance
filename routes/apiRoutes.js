@@ -1,6 +1,6 @@
 var db = require("../models");
 
-module.exports = function(app) {
+module.exports = function (app) {
   // // Get all examples
   // app.get("/api/examples", function (req, res) {
   //   db.Example.findAll({}).then(function (dbExamples) {
@@ -23,20 +23,20 @@ module.exports = function(app) {
   // });
 
   // =====================================================
-  
-  app.post("/api/todos", function(req, res){
-    db.Task.create(req.body).then(function(data){
+
+  app.post("/api/todos", function (req, res) {
+    db.Task.create(req.body).then(function (data) {
       res.json(data);
     });
   });
-  
-  app.put("/api/todos" + id, function(req, res){
+
+  app.put("/api/todos/:id", function (req, res) {
     // what is it updating? the todo completeion status?
     // db.Task.update({})
   });
 
-  app.delete("/api/todos/" + id, function(req, res){
-    db.Task.destroy({ where: { id: req.params.id }}).then(function(data){
+  app.delete("/api/todos/:id", function (req, res) {
+    db.Task.destroy({ where: { id: req.params.id } }).then(function (data) {
       res.json(data);
     });
   });

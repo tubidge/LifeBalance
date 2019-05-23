@@ -11,6 +11,7 @@ module.exports = function (app) {
   //   });
   // });
 
+  // Homepage
   app.get("/", function (req, res) {
 
     db.Selection.findAll({})
@@ -29,13 +30,8 @@ module.exports = function (app) {
       });
   });
 
-  app.get("/signup", function (req, res) {
-    res.render("signup");
-
-  });
-
-  // get "/signup" - for the "signup" page
-  app.get("/signup", function(req, res){
+  // Signup
+  app.get("/signup", function (req, res){
     res.render("signup");
   });
   
@@ -49,8 +45,8 @@ module.exports = function (app) {
     });
   });
 
-  // get "/login" - for the "login" page
-  app.get("/login", function(req, res){
+  // Login
+  app.get("/login", function (req, res){
     res.render("login");
   });
 
