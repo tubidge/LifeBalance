@@ -51,7 +51,7 @@ $(document).ready(function () {
   }
 
   function promptOptions() {
-    $(this).hide()
+    $(this).hide();
     $(this).siblings().show();
   }
 
@@ -59,34 +59,33 @@ $(document).ready(function () {
     var selected = $(".cat-options option:selected").val();
     $(this).siblings("h5").text(selected);
 
-    $(this).hide()
+    $(this).hide();
     $(this).siblings().show();
   }
 
   function cancelCatEdit() {
-    $(this).hide()
+    $(this).hide();
     $(this).siblings().show();
   }
 
   function completeTodo() {
     var currentTodo = $(this).data("id");
-    var checked = $(this).children("input[type=checkbox]").prop("checked")
-
+    var checked = $(this).children("input[type=checkbox]").prop("checked");
     if (checked) {
       $(this).fadeOut("slow");
     }
   }
 
   function promptNew() {
-    var input = $(".add-todo-item").children("input[type=text]")
+    var input = $(".add-todo-item").children("input[type=text]");
 
     $(".add-todo-item").show();
-    input.focus();;
+    input.focus();
   }
 
   function cancelNew() {
     $(".add-todo-item").hide();
-    $(".new-task-input").val("");
+    $(".new-task").val("");
   }
 
 });

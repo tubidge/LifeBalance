@@ -26,32 +26,35 @@ $("#signup-form").on("submit", function (event) {
 });
 
 // jQuery for new task
-$("#new-task").on("submit", function (event) {
-  event.preventDefault();
+$(".new-task").keydown(function (event) {
 
+  if (event.which === 13) {
+    event.preventDefault();
+    console.log("wrkd");
 
-  var data = {
-    task: $("input[name='todo']").val().trim(),
-    SelectionId: 1,
-    UserId: 1
-  };
+    $(".new-task").submit();
 
+    var data = {
+      task: $(".new-task").val().trim(),
+      SelectionId: 1,
+      UserId: 1
+    };
 
-  // var data = {
-  //   category: $("input[name='todo']").val().trim()
-  // };
+    // making ajax request with new task data
+    $.ajax({
+      url: "/api/todos",
+      method: "POST",
+      data: data
+    }).then(function () {
+      // console.log(data);
+      console.log("Added new task");
+    });
 
-
-  // making ajax request with new task data
-  $.ajax({
-    url: "/api/todos",
-    method: "POST",
-    data: data
-  }).then(function () {
-    // console.log(data);
-    console.log("Added new task");
-  });
+    $(".add-todo-item").hide();
+    $(".new-task").val("");
+  }
 });
+
 /**
 *
 * The forms are set up to use: $("#signup input[name=username-or-whatever]")
