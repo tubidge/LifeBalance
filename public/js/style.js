@@ -69,7 +69,7 @@ $(document).ready(function () {
   }
 
   function completeTodo() {
-    var currentTodo = $(this).data("id");
+    // var currentTodo = $(this).data("id");
     var checked = $(this).children("input[type=checkbox]").prop("checked");
     if (checked) {
       $(this).fadeOut("slow");
