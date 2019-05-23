@@ -27,13 +27,13 @@ module.exports = function(app) {
   //  === we will need ===
   // "/api/todos" to get todos on page load
   app.get("/api/todos", function(req, res){
-    db.ToDo.findAll({}).then(function(data){
+    db.Task.findAll({}).then(function(data){
       res.json(data);
     });
   });
 
   app.post("/api/todos", function(req, res){
-    db.ToDo.create(req.body).then(function(data){
+    db.Task.create(req.body).then(function(data){
       res.json(data);
     });
   });
@@ -48,7 +48,7 @@ module.exports = function(app) {
   // === we will need this delete route ===
   // "/api/todos/" + id
   app.delete("/api/todos/" + id, function(req, res){
-    db.ToDo.destroy({ where: { id: req.params.id }}).then(function(data){
+    db.Task.destroy({ where: { id: req.params.id }}).then(function(data){
       res.json(data);
     });
   });
