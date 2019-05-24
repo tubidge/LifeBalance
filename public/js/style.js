@@ -14,23 +14,15 @@ $(document).ready(function () {
 
   if ($(".cat-options").val() === "") {
     var el = ".collection-header, .btn-large, .collection-header, select, .collection-header, option";
+    var options = $(".cat-options");
     console.log($(".cat-options").val());
 
     $(el).addClass("grey darken-2");
 
-    var options = $(".cat-options");
     $(options).show();
     $(options).siblings().hide();
-
-  } else {
-    console.log("not empty");
-    console.log($(".cat-options").val());
-
-    $(el).removeClass("grey darken-2");
-    $(el).addClass("green");
-    $(options).hide();
-    $(options).siblings().show();
-  }
+    
+  } 
 
   // This function handles showing the input box for a user to edit a todo
   function editTodo() {
