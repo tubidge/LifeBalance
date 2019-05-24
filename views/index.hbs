@@ -1,39 +1,44 @@
-{{!-- card --}}
-{{!-- example --}}
-<div class="card">
-  <h5>{{category}}</h5>
+{{!-- <ul>
+  {{#each Selection}}
+  <li>id: {{this.id}} - category: {{this.category}}</li>
+  {{/each}}
+</ul>
 
-  <div>
-    <ul>
+<ul>
+  {{#each Tasks}}
+  <li>task-{{this.task}}</li>
+  {{/each}}
+</ul> --}}
 
-      <li data-complete="{{complete}}" data-category="{{category}}" data-id="{{id}}">
-        <label for="{{id}}"><input type="checkbox" name="{{id}}"></label>
-      </li>
+<br>
+<a href="/login">Logout</a>
+<br>
+<br>
 
-    </ul>
-  </div>
+<div class="col l4 s10 offset-m1">
+  <section class="category">
 
-  <button class="btn btn-primary" data-category="{{category}}" data-toggle="modal"
-    data-target="#new-task-modal">add</button>
+    <div class="card z-depth-4">
+      <ul class="collection with-header">
+
+        <li class="collection-header z-depth-2">
+          <h5 class="category-title">Work</h5>
+          {{> options-block}}
+        </li>
+
+        {{> task-block}}
+
+        <li class="add-todo-item collection-item" data-category="{{category}}" style='display: none;'>
+          <input type='text' class="new-task">
+        </li>
+
+        <a href=""><span class="sm-link">View All</span></a>
+      </ul>
+    </div>
+
+    <div class="btn-wrapper">
+      <a class="new-task-btn btn-floating btn-large waves-effect waves-light z-depth-4" data-category="{{category}}"><i
+          class="material-icons">add</i></a>
+    </div>
+  </section>
 </div>
-{{!-- end card --}}
-
-{{!-- modal --}}
-{{!-- example --}}
-<div class="modal-content">
-
-  <div class="modal-header">
-    <h5 class="modal-title">New Task in {{category}}</h5>
-  </div>
-  <div class="modal-body">
-
-    <form id="new-task">
-      <input class="form-control" type="text" name="username" placeholder="New Task"> <br>
-      <button type="submit" class="btn btn-primary">Add</button>
-    </form>
-
-  </div>
-
-</div>
-
-{{!-- end modal --}}
