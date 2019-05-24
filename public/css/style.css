@@ -140,3 +140,7 @@ input[type=password]:focus {
   font-weight: 500;
   font-size: .8rem;
 }
+
+.show {
+  display: block;
+}

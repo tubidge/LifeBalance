@@ -30,13 +30,12 @@ $(".new-task").keydown(function (event) {
 
   if (event.which === 13) {
     event.preventDefault();
-    console.log("wrkd");
 
     $(".new-task").submit();
 
     var data = {
-      task: $(".new-task").val().trim(),
-      SelectionId: 1,
+      task: $(this).val().trim(),
+      SelectionId: $(this).data("category"),
       UserId: 1
     };
 

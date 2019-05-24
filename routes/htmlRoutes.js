@@ -22,7 +22,7 @@ module.exports = function (app) {
         taskData: data
       };
       res.render("index", viewObj);
-      console.log(viewObj.taskData);
+      // console.log(viewObj.taskData);
 
     });
   });

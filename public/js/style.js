@@ -9,20 +9,9 @@ $(document).ready(function () {
   $(document).on("change", ".cat-options", selectCat);
   $(document).on("blur", ".cat-options", cancelCatEdit);
   $(document).on("click", ".new-task-btn", promptNew);
-  $(document).on("focusout", ".new-task-input", cancelNew);
+  $(document).on("blur", ".new-task", cancelNew);
 
 
-  if ($(".cat-options").val() === "") {
-    var el = ".collection-header, .btn-large, .collection-header, select, .collection-header, option";
-    var options = $(".cat-options");
-    console.log($(".cat-options").val());
-
-    $(el).addClass("grey darken-1");
-
-    $(options).show();
-    $(options).siblings().hide();
-
-  }
 
   // This function handles showing the input box for a user to edit a todo
   function editTodo() {
@@ -111,17 +100,24 @@ $(document).ready(function () {
   }
 
   function promptNew() {
-    console.log(this);
-
     var input = $(".add-todo-item").children("input[type=text]");
+    var section = $(this).closest("section");
+    section.addClass("new");
 
-    $(".add-todo-item").show();
+    $(".new .add-todo-item").show();
+
     input.focus();
+    section.removeClass("new");
+
   }
 
   function cancelNew() {
+
+    console.log("workd");
+
     $(".add-todo-item").hide();
     $(".new-task").val("");
+
   }
 
 });
