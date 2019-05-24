@@ -73,7 +73,6 @@ $(document).ready(function () {
     // var el = ".collection-header, .btn-large, .collection-header, select, option";
     // var selected = $(".cat-options option:selected").val();
     // $(this).siblings("h5").text(selected);
-
     // $(this.el).removeClass("grey darken-1");
     // $(this.el).addClass("light-green darken-1");
     // console.log(this);
@@ -95,6 +94,7 @@ $(document).ready(function () {
       console.log("Updated selected category and active status");
 
     });
+
   }
 
   function cancelCatEdit() {

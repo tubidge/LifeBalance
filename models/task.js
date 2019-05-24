@@ -7,6 +7,11 @@ module.exports = function (sequelize, DataTypes) {
         len: [2, 255]
       }
     },
+    status: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    }
   });
   Task.associate = function (models) {
 
