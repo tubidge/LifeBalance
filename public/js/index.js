@@ -5,97 +5,122 @@
  * #new-task - on submit (done?)
  */
 
-// jQuery for signup page
-$("#signup-form").on("submit", function (event) {
-  event.preventDefault();
+$(document).ready(function () {
+
+  $(document).on("keyup", ".todo-item", finishEdit);
+  $(document).on("click", ".todo-item", completeTodo);
+  $(document).on("change", ".cat-options", selectCat);
 
 
-  var newUser = {
-    User: $("input[name='username']").val().trim(),
-    password: $("input[name='password']").val().trim()
-  };
-  console.log(newUser);
-  // making ajax call with new user data
-  $.ajax({
-    url: "/signup",
-    method: "POST",
-    data: newUser
-  }).then(function () {
-    console.log("Added new user");
-  });
-});
-
-// jQuery for new task
-$(".new-task").keydown(function (event) {
-
-  if (event.which === 13) {
+  // jQuery for signup page
+  $("#signup-form").on("submit", function (event) {
     event.preventDefault();
-    console.log("wrkd");
-
-    $(".new-task").submit();
-
-    var data = {
-      task: $(".new-task").val().trim(),
-      SelectionId: 1,
-      UserId: 1
+    var newUser = {
+      User: $("input[name='username']").val().trim(),
+      password: $("input[name='password']").val().trim()
     };
-
-    // making ajax request with new task data
+    console.log(newUser);
+    // making ajax call with new user data
     $.ajax({
-      url: "/api/todos",
+      url: "/signup",
       method: "POST",
-      data: data
+      data: newUser
     }).then(function () {
-      // console.log(data);
-      console.log("Added new task");
+      console.log("Added new user");
     });
+  });
 
-    $(".add-todo-item").hide();
-    $(".new-task").val("");
+  // jQuery for new task
+  $(".new-task").keydown(function (event) {
+
+    if (event.which === 13) {
+      event.preventDefault();
+      console.log("wrkd");
+      $(".new-task").submit();
+      var data = {
+        task: $(".new-task").val().trim(),
+        SelectionId: 1,
+        UserId: 1
+      };
+      // making ajax request with new task data
+      $.ajax({
+        url: "/api/todos",
+        method: "POST",
+        data: data
+      }).then(function () {
+        // console.log(data);
+        console.log("Added new task");
+      });
+
+      $(".add-todo-item").hide();
+      $(".new-task").val("");
+    }
+  });
+
+  // This function starts updating a todo in the database if a user hits the "Enter Key"
+  // While in edit mode
+  function finishEdit(event) {
+    // var updatedTodo = $(this).data("id");
+    if (event.which === 13) {
+      var text = $(this).children("input[type='text']").val().trim();
+      $(this).blur();
+      // updateTodo(updatedTodo);
+      $(this).children("lable").text(text);
+      console.log(text);
+    }
+    $(this).closest("li").removeClass("edit-input");
   }
+
+  function selectCat() {
+    var selected = $(".cat-options option:selected").val();
+    $(this).siblings("h5").text(selected);
+
+    $(this).hide();
+    $(this).siblings().show();
+  }
+
+  /**
+  *
+  * The forms are set up to use: $("#signup input[name=username-or-whatever]")
+  * to target the individual inputs.
+  *
+  * We'll need an event listener, and object from the form data and an ajax call? Yeah? Is that all we do here?
+  */
+
+  /**
+  * === we will need ===
+  * "/api/todos" to get todos on page load
+  */
+
+  /**
+   * === we will need these post routes ===
+   * get "/signup" - for the "signup" page
+   * get "/login" - for the "login" page
+   */
+
+  /**
+  * .todo-item - on click
+  *
+  *  id from data="id"
+  *  === we will need this put route ===
+  * "/api/todos" + id
+  *
+  */
+
+  /**
+  * .delete - on click
+  *
+  *  id from data="id"
+  *  === we will need this delete route ===
+  *  "/api/todos/" + id
+  */
+
+  // $.ajax("/", {
+  //   type: "GET"
+  // }).then(
+  //   function () {
+  //     console.log("workd");
+  //     location.reload();
+  //   }
+  // )
 });
-
-/**
-*
-* The forms are set up to use: $("#signup input[name=username-or-whatever]")
-* to target the individual inputs.
-*
-* We'll need an event listener, and object from the form data and an ajax call? Yeah? Is that all we do here?
-*/
-
-/**
-* === we will need ===
-* "/api/todos" to get todos on page load
-*/
-
-/**
- * === we will need these post routes ===
- * get "/signup" - for the "signup" page
- * get "/login" - for the "login" page
- */
-
-/**
-* .todo-item - on click
-*
-*  id from data="id"
-*  === we will need this put route ===
-* "/api/todos" + id
-*
-*/
-
-/**
-* .delete - on click
-*
-*  id from data="id"
-*  === we will need this delete route ===
-*  "/api/todos/" + id
-*/
-
-// $.ajax("/", {
-//   type: "GET"
-// }).then(
-//   function () {
-//     console.log("workd");
-//     location.reload();
-//   }
-// );
