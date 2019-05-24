@@ -15,6 +15,7 @@
 <br>
 <br>
 
+
 <div class="col l4 s10 offset-m1">
   <section class="category">
 
@@ -22,14 +23,27 @@
       <ul class="collection with-header">
 
         <li class="collection-header z-depth-2">
-          <h5 class="category-title">Work</h5>
-          {{> options-block}}
+          <h5 class="category-title"></h5>
+          {{!-- {{> options-block}} --}}
+          <select class="browser-default cat-options" style="display: none;">
+            <option value="">Choose Category</option>
+            {{#each taskData}}
+            <option value="{{this.category}}" data-category="{{id}}">{{this.category}}</option>
+            {{/each}}
+          </select>
         </li>
 
-        {{> task-block}}
+        {{!-- {{> task-block}} --}}
+        {{#each Tasks }}
+        <li class="todo-item collection-item" data-category="{{SelectionId}}" data-id="{{id}}">
+          <input name="{{id}}" type="checkbox" />
+          <lable for="{{id}}">{{task}}</lable>
+          <input type="text" class="edit" style="display: none;" />
+        </li>
+        {{/each}}
 
-        <li class="add-todo-item collection-item" data-category="{{category}}" style='display: none;'>
-          <input type='text' class="new-task">
+        <li class="add-todo-item collection-item" data-category="{{category}}" style="display: none;">
+          <input type="text" class="new-task">
         </li>
 
         <a href=""><span class="sm-link">View All</span></a>

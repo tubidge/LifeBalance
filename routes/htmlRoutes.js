@@ -14,27 +14,24 @@ module.exports = function (app) {
   // Homepage
   app.get("/", function (req, res) {
 
-    db.Selection.findAll({})
-      .then(function (dataSelect) {
+    db.Selection.findAll({
+      include: [db.Task]
+    }).then(function (data) {
 
-        db.Task.findAll({})
-          .then(function (dataTasks) {
+      var viewObj = {
+        taskData: data
+      };
+      res.render("index", viewObj);
+     // console.log(viewObj.taskData);
 
-          var viewObj = {
-            Selection: dataSelect,
-            Tasks: dataTasks
-          };
-          res.render("index", viewObj);
-
-        });
-      });
+    });
   });
 
   // Signup
-  app.get("/signup", function (req, res){
+  app.get("/signup", function (req, res) {
     res.render("signup");
   });
-  
+
   app.post("/signup", function (req, res) {
     console.log(req.body);
 
@@ -46,7 +43,7 @@ module.exports = function (app) {
   });
 
   // Login
-  app.get("/login", function (req, res){
+  app.get("/login", function (req, res) {
     res.render("login");
   });
 
