@@ -1,0 +1,142 @@
+body {
+  font-family: 'Montserrat', sans-serif;  
+  background-color: #f1f2f1;
+}
+
+h5,
+.collection-header select {
+  margin: 1.0933333333rem 0 0.656rem 0;
+  font-weight: 500;
+  padding: .8rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 1.3rem;
+  color: #fff;
+}
+
+.sm-link {
+  font-size: .8rem;
+  color: #9b9b9b;
+  text-align: center;
+  display: block;
+  margin: .7rem;
+}
+
+.sm-link:hover {
+  color: #454545;
+  transition-delay: .1s;
+}
+
+/* Login/Signup */
+
+.login .collection {
+  max-height: 400px;
+  min-height: 270px;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 2rem
+}
+
+.login .btn, 
+.login a {
+  max-width: 6rem;
+  align-self: center;
+}
+
+.login .collection-item {
+  background-color: #f1f2f1
+}
+
+.category .collection-header,
+.btn-floating.btn-large {
+  background-color: #80ab49;
+}
+
+.category .collection-header  {
+  height: 180px;
+  margin-bottom: 2rem;
+}
+
+.collection .collection-item {
+    line-height: 1.5rem;
+    padding: 10px 20px;
+    margin: 0;
+    border: 1px solid #e2e5e4;
+    width: 93%;
+    margin: .5rem auto;
+    border-radius: 5px;
+}
+
+.category .collection {
+  background-color: #f1f2f1;
+  padding-bottom: 3rem;
+}
+
+.collection-item {
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.btn-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.category .btn-large {
+  align-self: center;
+  margin-top: -40px;
+}
+
+input[type=checkbox] {
+    /* -webkit-appearance:none; */
+    width:20px;
+    height:20px;
+    background:white;
+    border-radius:5px;
+    border:1px solid #e2e5e4;
+    margin-right: 1rem;
+    background: #ccc
+}
+
+input[type=checkbox]:checked + lable {
+  transition-delay: .1s;
+  text-decoration: line-through;
+  opacity: .4;
+}
+      
+/* .collection-item.edit-input {
+  border: 1px solid #80ab49;
+  background-color: #fff;
+} */
+
+input[type=text] {
+  opacity: .7;
+  font-weight: 300;
+}
+
+input[type=text]:focus,
+input[type=password]:focus {
+  height: 2.5rem;
+}
+
+.category .collection-header h5:hover {
+  transition-delay: .1s;
+  border: 1px solid #fff;
+  opacity: .5;
+  padding: .8rem;
+  border-radius: 5px;
+}
+
+.collection-header select,
+.collection-header option {
+    /* -webkit-appearance:none; */
+  border-radius: 5px;
+  background-color: #80ab49;
+  opacity: .7;
+  font-weight: 500;
+  font-size: .8rem;
+}

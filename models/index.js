@@ -33,4 +33,11 @@ Object.keys(db).forEach(function(modelName) {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+db.User = sequelize.import(__dirname + "/user.js");
+db.Selection = sequelize.import(__dirname + "/selection.js");
+db.Task = sequelize.import(__dirname + "/task.js");
+
+db.Selection.associate(db);
+db.Task.associate(db);
+
 module.exports = db;
