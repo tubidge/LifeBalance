@@ -7,26 +7,29 @@ var users = [
 ];
 
 var categories = [
-  { category: "Work" },
+  {
+    category: "Work",
+    active: true
+  },
   { category: "Home" },
   { category: "Social" }
 ];
 
 var tasks = [
-  { 
+  {
     task: "one",
     UserId: "1",
-    SelectionId: "1" 
+    SelectionId: "1"
   },
-  { 
+  {
     task: "two",
     UserId: "1",
-    SelectionId: "2" 
+    SelectionId: "2"
   },
-  { 
+  {
     task: "three",
     UserId: "1",
-    SelectionId: "2" 
+    SelectionId: "2"
   },
 
 ];
@@ -34,11 +37,11 @@ var tasks = [
 module.exports = function (app) {
 
   app.post("/seed/sel", function (req, res) {
-  
-    categories.forEach(function(item){
+
+    categories.forEach(function (item) {
       db.Selection.create(item).then(function (dbExample) {
         console.log(item);
-  
+
         res.json(dbExample);
       });
 
@@ -48,10 +51,10 @@ module.exports = function (app) {
 
   app.post("/seed/tasks", function (req, res) {
 
-    tasks.forEach(function(item){
+    tasks.forEach(function (item) {
       db.Task.create(item).then(function (dbExample) {
         console.log(item);
-  
+
         res.json(dbExample);
       });
 
@@ -60,11 +63,11 @@ module.exports = function (app) {
 
 
   app.post("/seed/users", function (req, res) {
-    
-    users.forEach(function(item){
+
+    users.forEach(function (item) {
       db.User.create(item).then(function (dbExample) {
         console.log(item);
-  
+
         res.json(dbExample);
       });
 

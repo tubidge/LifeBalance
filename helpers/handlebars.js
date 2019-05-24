@@ -1,10 +1,34 @@
 function hbsHelpers(hbs) {
   return hbs.create({
-    helpers: { // This was missing
-      get: function (obj, prop) {
-        console.log(obj[prop]);
-        return obj[prop];
+    defaultLayout: "main",
+    extname: ".hbs",
+
+    helpers: {
+      foo: function () {
+        var nest = {
+          one: {
+            bar: "is the lonliest!"
+          },
+          two: "is just as bad as one"
+        };
+        return nest.one.bar;
+      },
+      trim: function (data) {
+        var arr = [];
+        var section;
+
+        data.forEach(function (item) {
+          // console.log(item.dataValues);
+          section = item.dataValues;
+
+          arr.push(section);
+        });
+        // console.log(data);
+        console.log(arr);
+
+        return arr;
       }
+
 
       // More helpers...
     }
@@ -13,3 +37,5 @@ function hbsHelpers(hbs) {
 }
 
 module.exports = hbsHelpers;
+
+

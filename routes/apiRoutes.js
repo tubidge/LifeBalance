@@ -40,4 +40,23 @@ module.exports = function (app) {
       res.json(data);
     });
   });
+
+  // =====================================================
+
+  app.put("/api/selection/:id", function (req, res) {
+
+    db.Selection.update({
+      active: req.body.active,
+
+    }, {
+        where: {
+          id: req.body.id
+        }
+      }).then(function (result) {
+        res.json(result);
+        console.log("updated active");
+
+      });
+  });
+
 };

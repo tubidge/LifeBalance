@@ -17,12 +17,12 @@ $(document).ready(function () {
     var options = $(".cat-options");
     console.log($(".cat-options").val());
 
-    $(el).addClass("grey darken-2");
+    $(el).addClass("grey darken-1");
 
     $(options).show();
     $(options).siblings().hide();
-    
-  } 
+
+  }
 
   // This function handles showing the input box for a user to edit a todo
   function editTodo() {
@@ -69,15 +69,32 @@ $(document).ready(function () {
   }
 
   function selectCat() {
-    var el = ".collection-header, .btn-large, .collection-header, select, .collection-header, option";
-    var selected = $(".cat-options option:selected").val();
-    $(this).siblings("h5").text(selected);
 
-    $(el).removeClass("grey darken-2");
-    $(el).addClass("light-green darken-2");
+    // var el = ".collection-header, .btn-large, .collection-header, select, option";
+    // var selected = $(".cat-options option:selected").val();
+    // $(this).siblings("h5").text(selected);
 
-    $(this).hide();
-    $(this).siblings().show();
+    // $(this.el).removeClass("grey darken-1");
+    // $(this.el).addClass("light-green darken-1");
+    // console.log(this);
+
+    // $(this).hide();
+    // $(this).siblings().show();
+
+    var id = $("option:selected").data("category");
+    var data = {
+      id: id,
+      active: true
+    };
+
+    $.ajax({
+      url: "/api/selection/:id",
+      method: "PUT",
+      data: data
+    }).then(function () {
+      console.log("Updated selected category and active status");
+
+    });
   }
 
   function cancelCatEdit() {
@@ -94,6 +111,8 @@ $(document).ready(function () {
   }
 
   function promptNew() {
+    console.log(this);
+
     var input = $(".add-todo-item").children("input[type=text]");
 
     $(".add-todo-item").show();

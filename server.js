@@ -13,23 +13,9 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Handlebars
-// var hbsHelpers = exphbs.create({
-//   helpers: require("./helpers/handlebars.js").helpers,
-//   defaultLayout: "main",
-//   extname: ".hbs"
-// });
 
-// app.engine(".hbs", hbsHelpers.engine);
-// app.set("view engine", ".hbs");
-
-// Handlebars
-app.engine(
-  "hbs",
-  exphbs({
-    defaultLayout: "main",
-    extname: ".hbs"
-  })
-);
+var handlebars = require("./helpers/handlebars.js")(exphbs);
+app.engine(".hbs", handlebars.engine);
 app.set("view engine", ".hbs");
 
 // Routes

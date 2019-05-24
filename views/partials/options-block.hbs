@@ -1,5 +1,8 @@
-<select class="browser-default cat-options" style='display: none;'>
-  {{#each Selection}}
-  <option value="{{this.category}}" data-category="{{id}}">{{this.category}}</option>
+<select class="browser-default cat-options" style="display: none;">
+  <option value="">Choose Category</option>
+  {{#each category}}
+  {{#unless active}}
+  <option value="{{this.category}}" data-active="{{active}}" data-category="{{id}}">{{this.category}}</option>
+  {{/unless}}
   {{/each}}
 </select>

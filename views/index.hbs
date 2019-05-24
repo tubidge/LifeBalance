@@ -1,21 +1,20 @@
-{{!-- <ul>
-  {{#each Selection}}
-  <li>id: {{this.id}} - category: {{this.category}}</li>
+<ul>
+  {{#each taskData}}
+  <li>id: {{this.id}} - category: {{this.category}}
+    task-
+    {{#each Tasks}}
+    {{task}}
+    {{/each}}</li>
   {{/each}}
 </ul>
-
-<ul>
-  {{#each Tasks}}
-  <li>task-{{this.task}}</li>
-  {{/each}}
-</ul> --}}
 
 <br>
 <a href="/login">Logout</a>
 <br>
 <br>
 
-
+{{#each taskData}}
+{{#if active}}
 <div class="col l4 s10 offset-m1">
   <section class="category">
 
@@ -23,24 +22,20 @@
       <ul class="collection with-header">
 
         <li class="collection-header z-depth-2">
-          <h5 class="category-title"></h5>
+          <h5 class="category-title">{{category}}</h5>
           {{!-- {{> options-block}} --}}
           <select class="browser-default cat-options" style="display: none;">
             <option value="">Choose Category</option>
-            {{#each taskData}}
-            <option value="{{this.category}}" data-category="{{id}}">{{this.category}}</option>
+            {{#each category}}
+            {{#unless active}}
+            <option value="{{this.category}}" data-active="{{active}}" data-category="{{id}}">{{this.category}}</option>
+            {{/unless}}
             {{/each}}
           </select>
+
         </li>
 
-        {{!-- {{> task-block}} --}}
-        {{#each Tasks }}
-        <li class="todo-item collection-item" data-category="{{SelectionId}}" data-id="{{id}}">
-          <input name="{{id}}" type="checkbox" />
-          <lable for="{{id}}">{{task}}</lable>
-          <input type="text" class="edit" style="display: none;" />
-        </li>
-        {{/each}}
+        {{> task-block}}
 
         <li class="add-todo-item collection-item" data-category="{{category}}" style="display: none;">
           <input type="text" class="new-task">
@@ -49,10 +44,11 @@
         <a href=""><span class="sm-link">View All</span></a>
       </ul>
     </div>
-
     <div class="btn-wrapper">
-      <a class="new-task-btn btn-floating btn-large waves-effect waves-light z-depth-4" data-category="{{category}}"><i
+      <a class="new-task-btn btn-floating btn-large waves-effect waves-light z-depth-4"><i
           class="material-icons">add</i></a>
     </div>
   </section>
 </div>
+{{/if}}
+{{/each}}
