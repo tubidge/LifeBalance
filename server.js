@@ -33,8 +33,8 @@ app.engine(
 app.set("view engine", ".hbs");
 
 // Routes
-require("./routes/htmlRoutes")(app);
 require("./routes/apiRoutes")(app);
+require("./routes/htmlRoutes")(app);
 require("./routes/seed")(app);
 
 var syncOptions = { force: true };
@@ -43,7 +43,7 @@ var syncOptions = { force: true };
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`
 if (process.env.NODE_ENV === "test") {
-  syncOptions.force = false;
+  syncOptions.force = true;
 }
 
 // Starting the server, syncing our models ------------------------------------/

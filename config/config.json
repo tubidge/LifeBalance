@@ -1,14 +1,14 @@
 {
   "development": {
     "username": "root",
-    "password": "root",
+    "password": "R0otsNh0ots9",
     "database": "lifebalancedb",
     "host": "localhost",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": "root",
+    "password": "",
     "database": "lifebalancedb",
     "host": "localhost",
     "dialect": "mysql",
