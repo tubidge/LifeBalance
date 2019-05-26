@@ -16,16 +16,16 @@ module.exports = function (app) {
 
     db.Selection.findAll({
       include: [db.Task]
+
     }).then(function (data) {
-
-      var viewObj = {
-        taskData: data
+      var viewObj = { 
+          sections: data, 
       };
-      res.render("index", viewObj);
-      // console.log(viewObj.taskData);
 
+      res.render("index", viewObj);
     });
   });
+
 
   // Signup
   app.get("/signup", function (req, res) {

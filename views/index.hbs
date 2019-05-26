@@ -1,5 +1,5 @@
 <ul>
-  {{#each taskData}}
+  {{#each sections}}
   <li>id: {{this.id}} - category: {{this.category}}
     task-
     {{#each Tasks}}
@@ -13,8 +13,6 @@
 <br>
 <br>
 
-{{#each taskData}}
-{{#if active}}
 <div class="col l4 s10 offset-m1">
   <section class="category">
 
@@ -22,17 +20,8 @@
       <ul class="collection with-header">
 
         <li class="collection-header z-depth-2">
-          <h5 class="category-title">{{category}}</h5>
-          {{!-- {{> options-block}} --}}
-          <select class="browser-default cat-options" style="display: none;">
-            <option value="">Choose Category</option>
-            {{#each category}}
-            {{#unless active}}
-            <option value="{{this.category}}" data-active="{{active}}" data-category="{{id}}">{{this.category}}</option>
-            {{/unless}}
-            {{/each}}
-          </select>
-
+          <h5 class="category-title" data-active="{{active}}" data-category="{{id}}">{{category}}</h5>
+          {{> options-block}}
         </li>
 
         {{> task-block}}
@@ -50,5 +39,57 @@
     </div>
   </section>
 </div>
-{{/if}}
-{{/each}}
+
+<div class="col l4 s10 offset-m1">
+  <section class="category">
+
+    <div class="card z-depth-4">
+      <ul class="collection with-header">
+
+        <li class="collection-header z-depth-2">
+          <h5 class="category-title" data-active="{{active}}" data-category="{{id}}">{{category}}</h5>
+          {{> options-block}}
+        </li>
+
+        {{> task-block}}
+
+        <li class="add-todo-item collection-item" style="display: none;">
+          <input type="text" class="new-task" data-category="{{id}}">
+        </li>
+
+        <a href=""><span class="sm-link">View All</span></a>
+      </ul>
+    </div>
+    <div class="btn-wrapper">
+      <a class="new-task-btn btn-floating btn-large waves-effect waves-light z-depth-4"><i
+          class="material-icons">add</i></a>
+    </div>
+  </section>
+</div>
+
+<div class="col l4 s10 offset-m1">
+  <section class="category">
+
+    <div class="card z-depth-4">
+      <ul class="collection with-header">
+
+        <li class="collection-header z-depth-2">
+          <h5 class="category-title" data-active="{{active}}" data-category="{{id}}">{{category}}</h5>
+          {{> options-block}}
+        </li>
+
+        {{> task-block}}
+
+        <li class="add-todo-item collection-item" style="display: none;">
+          <input type="text" class="new-task" data-category="{{id}}">
+        </li>
+
+        <a href=""><span class="sm-link">View All</span></a>
+      </ul>
+    </div>
+    <div class="btn-wrapper">
+      <a class="new-task-btn btn-floating btn-large waves-effect waves-light z-depth-4"><i
+          class="material-icons">add</i></a>
+    </div>
+  </section>
+</div>

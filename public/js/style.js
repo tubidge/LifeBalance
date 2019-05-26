@@ -1,17 +1,62 @@
 $(document).ready(function () {
   M.AutoInit();
+  // selectOnLoad();
 
   $(document).on("dblclick", ".todo-item", editTodo);
   $(document).on("keyup", ".todo-item", finishEdit);
   $(document).on("blur", ".todo-item", cancelEdit);
   $(document).on("click", ".todo-item", completeTodo);
   $(document).on("click", ".category-title", promptOptions);
-  $(document).on("change", ".cat-options", selectCat);
+  // $(document).on("focus", ".cat-options", selectCat);
   $(document).on("blur", ".cat-options", cancelCatEdit);
   $(document).on("click", ".new-task-btn", promptNew);
   $(document).on("blur", ".new-task", cancelNew);
 
+  function selectOnLoad() {
 
+    $("section").each(function () {
+
+      var value = $(this).find(".category-title").text();
+      var option = $(this).find(".cat-options option[value=" + value + "]");
+      option.attr("selected", "selected");
+    });
+  }
+
+  var prevSelection;
+  var data = {};
+  // var prevId = prevSelection.data("category");
+  $(".cat-options").on("focus", function () {
+    prevSelection = $(this).find("option:selected");
+
+    data.prevId = prevSelection.data("category");
+
+    console.log(this);
+    console.log(prevSelection);
+    console.log(data);
+  }).change(function () {
+
+    console.log(this);
+
+    prevSelection.removeAttr("selected");
+    var selected = $(this).find("option:selected");
+    selected.attr("selected", "selected");
+
+    data.prevActive = false;
+    data.id = selected.data("category");
+    data.active = true;
+
+    console.log(data);
+
+    $.ajax({
+      url: "/api/selection/:id",
+      method: "PUT",
+      data: data
+    }).then(function () {
+      console.log("Updated active status");
+      location.reload();
+    });
+
+  });
 
   // This function handles showing the input box for a user to edit a todo
   function editTodo() {
@@ -58,31 +103,27 @@ $(document).ready(function () {
   }
 
   function selectCat() {
+    var selected = $(".cat-options option:selected");
+    // selected.attr("selected", "selected");
+    // $(this).siblings("h5").text(selected.val());
 
-    // var el = ".collection-header, .btn-large, .collection-header, select, option";
-    // var selected = $(".cat-options option:selected").val();
-    // $(this).siblings("h5").text(selected);
-    // $(this.el).removeClass("grey darken-1");
-    // $(this.el).addClass("light-green darken-1");
-    // console.log(this);
+    $(this).hide();
+    $(this).siblings().show();
 
-    // $(this).hide();
-    // $(this).siblings().show();
+    // var id = $("option:selected").data("category");
+    // var data = {
+    //   id: id,
+    //   active: true
+    // };
 
-    var id = $("option:selected").data("category");
-    var data = {
-      id: id,
-      active: true
-    };
+    // $.ajax({
+    //   url: "/api/selection/:id",
+    //   method: "PUT",
+    //   data: data
+    // }).then(function () {
+    //   console.log("Updated selected category and active status");
 
-    $.ajax({
-      url: "/api/selection/:id",
-      method: "PUT",
-      data: data
-    }).then(function () {
-      console.log("Updated selected category and active status");
-
-    });
+    // });
 
   }
 

@@ -27,6 +27,25 @@ function hbsHelpers(hbs) {
         console.log(arr);
 
         return arr;
+      },
+      list: function (context, options) {
+
+        data.forEach(function (item) {
+          obj = {
+            id: item.dataValues.id,
+            category: item.dataValues.category,
+            active: item.dataValues.active,
+          };
+
+          return '<option value="{{category}}" data-active="{{active}}" data-category="{{id}}">{{ category }}</option>'
+
+          // console.log(obj);
+          // return obj;
+          // arr.push(obj);
+        });
+        // console.log(arr);
+
+        // return arr;
       }
 
 
