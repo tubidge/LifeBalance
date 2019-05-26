@@ -11,10 +11,9 @@ $(document).ready(function () {
   $(document).on("click", ".new-task-btn", promptNew);
   $(document).on("focusout", ".new-task-input", cancelNew);
 
-<<<<<<< HEAD
 
   if ($(".cat-options").val() === "") {
-    var el = ".collection-header, .btn-large, .collection-header, select, .collection-header, option";
+    var el = ".collection-header, .btn-large, select, option";
     console.log($(".cat-options").val());
 
     $(el).addClass("grey darken-2");
@@ -33,8 +32,6 @@ $(document).ready(function () {
     $(options).siblings().show();
   }
 
-=======
->>>>>>> 296107d09f2277a6f94716c3ae8924956af8cc14
   // This function handles showing the input box for a user to edit a todo
   function editTodo() {
     // var currentTodo = $(this).data("id");
