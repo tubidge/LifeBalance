@@ -7,51 +7,27 @@ function hbsHelpers(hbs) {
       foo: function () {
         var nest = {
           one: {
-            bar: "is the lonliest!"
+            is: "the lonliest number"
           },
           two: "is just as bad as one"
         };
         return nest.one.bar;
       },
-      trim: function (data) {
-        var arr = [];
-        var section;
 
-        data.forEach(function (item) {
-          // console.log(item.dataValues);
-          section = item.dataValues;
+      header: function (data) {
+        var splice, str;
+        for (var i = 0; i < data.length; i++) {
 
-          arr.push(section);
-        });
-        // console.log(data);
-        console.log(arr);
+          splice = data.splice(0, 1);
+          str = `<h5 class="category-title" data-category=${splice[0].dataValues.id}>${splice[0].dataValues.category}</h5>`
+          // console.log(splice);
+          // console.log(str);
 
-        return arr;
-      },
-      list: function (context, options) {
+          return str;
+        }
 
-        data.forEach(function (item) {
-          obj = {
-            id: item.dataValues.id,
-            category: item.dataValues.category,
-            active: item.dataValues.active,
-          };
-
-          return '<option value="{{category}}" data-active="{{active}}" data-category="{{id}}">{{ category }}</option>'
-
-          // console.log(obj);
-          // return obj;
-          // arr.push(obj);
-        });
-        // console.log(arr);
-
-        // return arr;
       }
-
-
-      // More helpers...
     }
-
   });
 }
 

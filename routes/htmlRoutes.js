@@ -16,13 +16,14 @@ module.exports = function (app) {
 
     db.Selection.findAll({
       include: [db.Task]
+    }).then(function (dataSelect) {
 
-    }).then(function (data) {
-      var viewObj = { 
-          sections: data, 
+      var viewObj = {
+        Selection: dataSelect
       };
 
       res.render("index", viewObj);
+
     });
   });
 

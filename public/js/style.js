@@ -1,6 +1,7 @@
 $(document).ready(function () {
   M.AutoInit();
   // selectOnLoad();
+  // queryOptions();
 
   $(document).on("dblclick", ".todo-item", editTodo);
   $(document).on("keyup", ".todo-item", finishEdit);
@@ -8,12 +9,11 @@ $(document).ready(function () {
   $(document).on("click", ".todo-item", completeTodo);
   $(document).on("click", ".category-title", promptOptions);
   // $(document).on("focus", ".cat-options", selectCat);
-  $(document).on("blur", ".cat-options", cancelCatEdit);
+  // $(document).on("blur", ".cat-options", cancelCatEdit);
   $(document).on("click", ".new-task-btn", promptNew);
   $(document).on("blur", ".new-task", cancelNew);
 
   function selectOnLoad() {
-
     $("section").each(function () {
 
       var value = $(this).find(".category-title").text();
@@ -24,18 +24,14 @@ $(document).ready(function () {
 
   var prevSelection;
   var data = {};
-  // var prevId = prevSelection.data("category");
+
   $(".cat-options").on("focus", function () {
-    prevSelection = $(this).find("option:selected");
 
+    prevSelection = $(this).siblings(".category-title");
     data.prevId = prevSelection.data("category");
+    console.log(data.prevId);
 
-    console.log(this);
-    console.log(prevSelection);
-    console.log(data);
   }).change(function () {
-
-    console.log(this);
 
     prevSelection.removeAttr("selected");
     var selected = $(this).find("option:selected");
@@ -47,6 +43,7 @@ $(document).ready(function () {
 
     console.log(data);
 
+    // updateCategory(data);
     $.ajax({
       url: "/api/selection/:id",
       method: "PUT",
@@ -55,8 +52,21 @@ $(document).ready(function () {
       console.log("Updated active status");
       location.reload();
     });
-
+    $(this).hide();
+    $(this).siblings().show();
   });
+
+  if ($(".cat-options").val() === "") {
+    var el = ".collection-header, .btn-large, select, option";
+    // console.log($(".cat-options").val());
+
+    $(el).addClass("grey darken-1");
+
+    var options = $(".cat-options");
+    // $(options).show();
+    // $(options).siblings().hide();
+
+  }
 
   // This function handles showing the input box for a user to edit a todo
   function editTodo() {
@@ -102,10 +112,10 @@ $(document).ready(function () {
     $(this).siblings().show();
   }
 
-  function selectCat() {
+  function queryTasks() {
     var selected = $(".cat-options option:selected");
-    // selected.attr("selected", "selected");
-    // $(this).siblings("h5").text(selected.val());
+    selected.attr("selected", "selected");
+    $(this).siblings("h5").text(selected.val());
 
     $(this).hide();
     $(this).siblings().show();
@@ -115,16 +125,17 @@ $(document).ready(function () {
     //   id: id,
     //   active: true
     // };
+  }
 
-    // $.ajax({
-    //   url: "/api/selection/:id",
-    //   method: "PUT",
-    //   data: data
-    // }).then(function () {
-    //   console.log("Updated selected category and active status");
-
-    // });
-
+  function updateCategory(data) {
+    $.ajax({
+      url: "/api/selection/:id",
+      method: "PUT",
+      data: data
+    }).then(function () {
+      console.log("Updated active status");
+      location.reload();
+    });
   }
 
   function cancelCatEdit() {
@@ -154,11 +165,13 @@ $(document).ready(function () {
 
   function cancelNew() {
 
-    console.log("workd");
-
     $(".add-todo-item").hide();
     $(".new-task").val("");
+  }
 
+
+  function appendOptions(data) {
+    var opt = $("<option>").val("").data("active").data("category").text();
   }
 
 });
