@@ -14,6 +14,10 @@ h5,
   color: #fff;
 }
 
+.row {
+  margin-top: 10rem; 
+}
+
 .sm-link {
   font-size: .8rem;
   color: #9b9b9b;
@@ -123,14 +127,6 @@ input[type=password]:focus {
   height: 2.5rem;
 }
 
-.category .collection-header h5:hover {
-  transition-delay: .1s;
-  border: 1px solid #fff;
-  opacity: .5;
-  padding: .8rem;
-  border-radius: 5px;
-}
-
 .collection-header select,
 .collection-header option {
     /* -webkit-appearance:none; */
@@ -148,4 +144,3 @@ input[type=password]:focus {
 .category-checkbox {
   align-items: center;
 }
-

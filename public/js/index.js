@@ -9,7 +9,6 @@ $(document).ready(function () {
 
   $(document).on("keyup", ".todo-item", finishEdit);
   $(document).on("click", ".todo-item", completeTodo);
-  $(document).on("change", ".cat-options", selectCat);
 
   // jQuery for signup page
   $("#signup-form").on("submit", function (event) {
@@ -44,7 +43,7 @@ $(document).ready(function () {
         SelectionId: $(this).data("category"),
         UserId: 1
       };
-      
+
       // making ajax request with new task data
       $.ajax({
         url: "/api/todos",
@@ -75,6 +74,13 @@ $(document).ready(function () {
   }
 
 
+  function completeTodo() {
+    // var currentTodo = $(this).data("id");
+    var checked = $(this).children("input[type=checkbox]").prop("checked");
+    if (checked) {
+      $(this).fadeOut("slow");
+    }
+  }
   /**
   *
   * The forms are set up to use: $("#signup input[name=username-or-whatever]")

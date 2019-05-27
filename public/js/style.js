@@ -2,7 +2,8 @@ $(document).ready(function () {
   M.AutoInit();
   selectOnLoad();
 
-  $(document).on("change", ".category-checkbox", updateCategory);
+  $(document).on("click", ".sidenav-trigger", limitCategory);
+  $(document).on("change", ".category-checkbox", updateCategory, limitCategory);
   $(document).on("dblclick", ".todo-item", editTodo);
   // $(document).on("keyup", ".todo-item", finishEdit);
   $(document).on("blur", ".todo-item", cancelEdit);
@@ -13,10 +14,12 @@ $(document).ready(function () {
 
   // ===== Selection Code =====
   function selectOnLoad() {
+
     $(".category-title").each(function () {
       var value = $(this).text();
       var active = $("input[type=checkbox][value=" + value + "]");
       active.attr("checked", "checked");
+
     });
   }
 
@@ -39,10 +42,28 @@ $(document).ready(function () {
       console.log("Updated active status");
       location.reload();
     });
-
   }
 
-    // ===== Task Code =====
+  function limitCategory() {
+    var count = $("input:checkbox:checked").length;
+    var input = $(".category-checkbox input[type=checkbox]");
+
+    if (count >= 3) {
+
+      input.each(function () {
+        var selected = $(this).prop("checked");
+        if (!selected) {
+          $(this).prop("disabled", true);
+        }
+      });
+
+    } else {
+      input.prop("disabled", false);
+    }
+  }
+
+
+  // ===== Task Code =====
 
   // This function handles showing the input box for a user to edit a todo
   function editTodo() {
