@@ -1,22 +1,3 @@
-<ul>
-  {{#each Selection}}
-  <li>id: {{this.id}} - category: {{this.category}}</li>
-  {{/each}}
-</ul>
-
-<ul>
-  {{#each Selection}}
-  {{#if active}}
-  <li>{{this.category}}</li>
-  {{/if}}
-  {{/each}}
-</ul>
-
-<br>
-<a href="/login">Logout</a>
-<br>
-<br>
-
 {{#each Selection}}
 {{#if active}}
 <div class="col l4 s10 offset-m1">
@@ -27,11 +8,6 @@
 
         <li class="collection-header z-depth-2">
           <h5 class="category-title" data-category="{{id}}">{{this.category}}</h5>
-          <select class="browser-default cat-options" style="display: none;">          
-            <option value="">Choose Category</option>       
-          
-    
-          </select>
         </li>
 
         {{> task-block}}

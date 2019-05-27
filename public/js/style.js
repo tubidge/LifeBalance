@@ -1,49 +1,36 @@
 $(document).ready(function () {
   M.AutoInit();
-  // selectOnLoad();
-  // queryOptions();
+  selectOnLoad();
 
+  $(document).on("change", ".category-checkbox", updateCategory);
   $(document).on("dblclick", ".todo-item", editTodo);
   $(document).on("keyup", ".todo-item", finishEdit);
   $(document).on("blur", ".todo-item", cancelEdit);
   $(document).on("click", ".todo-item", completeTodo);
-  $(document).on("click", ".category-title", promptOptions);
-  // $(document).on("focus", ".cat-options", selectCat);
-  // $(document).on("blur", ".cat-options", cancelCatEdit);
   $(document).on("click", ".new-task-btn", promptNew);
   $(document).on("blur", ".new-task", cancelNew);
 
-  function selectOnLoad() {
-    $("section").each(function () {
 
-      var value = $(this).find(".category-title").text();
-      var option = $(this).find(".cat-options option[value=" + value + "]");
-      option.attr("selected", "selected");
+  // ===== Selection Code =====
+  function selectOnLoad() {
+    $(".category-title").each(function () {
+      var value = $(this).text();
+      var active = $("input[type=checkbox][value=" + value + "]");
+      active.attr("checked", "checked");
     });
   }
 
-  var prevSelection;
-  var data = {};
+  // ***This isn't the best way to do this. Update after seeking advice***
+  /**
+   * If there is a way to update only the changed items on submit that would be ideal. 
+   * As it is I can only think how to update all selections or one at a time
+   */
+  function updateCategory() {
+    var data = {};
 
-  $(".cat-options").on("focus", function () {
+    data.id = $(this).children("input").attr("name");
+    data.active = $(this).children("input").prop("checked");
 
-    prevSelection = $(this).siblings(".category-title");
-    data.prevId = prevSelection.data("category");
-    console.log(data.prevId);
-
-  }).change(function () {
-
-    prevSelection.removeAttr("selected");
-    var selected = $(this).find("option:selected");
-    selected.attr("selected", "selected");
-
-    data.prevActive = false;
-    data.id = selected.data("category");
-    data.active = true;
-
-    console.log(data);
-
-    // updateCategory(data);
     $.ajax({
       url: "/api/selection/:id",
       method: "PUT",
@@ -52,21 +39,10 @@ $(document).ready(function () {
       console.log("Updated active status");
       location.reload();
     });
-    $(this).hide();
-    $(this).siblings().show();
-  });
-
-  if ($(".cat-options").val() === "") {
-    var el = ".collection-header, .btn-large, select, option";
-    // console.log($(".cat-options").val());
-
-    $(el).addClass("grey darken-1");
-
-    var options = $(".cat-options");
-    // $(options).show();
-    // $(options).siblings().hide();
 
   }
+
+    // ===== Task Code =====
 
   // This function handles showing the input box for a user to edit a todo
   function editTodo() {
@@ -107,42 +83,6 @@ $(document).ready(function () {
     $(this).closest("li").removeClass("edit-input");
   }
 
-  function promptOptions() {
-    $(this).hide();
-    $(this).siblings().show();
-  }
-
-  function queryTasks() {
-    var selected = $(".cat-options option:selected");
-    selected.attr("selected", "selected");
-    $(this).siblings("h5").text(selected.val());
-
-    $(this).hide();
-    $(this).siblings().show();
-
-    // var id = $("option:selected").data("category");
-    // var data = {
-    //   id: id,
-    //   active: true
-    // };
-  }
-
-  function updateCategory(data) {
-    $.ajax({
-      url: "/api/selection/:id",
-      method: "PUT",
-      data: data
-    }).then(function () {
-      console.log("Updated active status");
-      location.reload();
-    });
-  }
-
-  function cancelCatEdit() {
-    $(this).hide();
-    $(this).siblings().show();
-  }
-
   function completeTodo() {
     // var currentTodo = $(this).data("id");
     var checked = $(this).children("input[type=checkbox]").prop("checked");
@@ -160,18 +100,12 @@ $(document).ready(function () {
 
     input.focus();
     section.removeClass("new");
-
   }
 
   function cancelNew() {
-
     $(".add-todo-item").hide();
     $(".new-task").val("");
   }
 
-
-  function appendOptions(data) {
-    var opt = $("<option>").val("").data("active").data("category").text();
-  }
 
 });
