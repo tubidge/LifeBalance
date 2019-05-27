@@ -11,14 +11,15 @@ $(document).ready(function () {
   $(document).on("click", ".todo-item", completeTodo);
   $(document).on("change", ".cat-options", selectCat);
 
-
   // jQuery for signup page
   $("#signup-form").on("submit", function (event) {
     event.preventDefault();
+
     var newUser = {
       User: $("input[name='username']").val().trim(),
       password: $("input[name='password']").val().trim()
     };
+
     console.log(newUser);
     // making ajax call with new user data
     $.ajax({
@@ -35,13 +36,15 @@ $(document).ready(function () {
 
     if (event.which === 13) {
       event.preventDefault();
-      console.log("wrkd");
+
       $(".new-task").submit();
+
       var data = {
         task: $(".new-task").val().trim(),
-        SelectionId: 1,
+        SelectionId: $(this).data("category"),
         UserId: 1
       };
+      
       // making ajax request with new task data
       $.ajax({
         url: "/api/todos",
@@ -71,13 +74,6 @@ $(document).ready(function () {
     $(this).closest("li").removeClass("edit-input");
   }
 
-  function selectCat() {
-    var selected = $(".cat-options option:selected").val();
-    $(this).siblings("h5").text(selected);
-
-    $(this).hide();
-    $(this).siblings().show();
-  }
 
   /**
   *

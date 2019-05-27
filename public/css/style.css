@@ -60,13 +60,13 @@ h5,
 }
 
 .collection .collection-item {
-    line-height: 1.5rem;
-    padding: 10px 20px;
-    margin: 0;
-    border: 1px solid #e2e5e4;
-    width: 93%;
-    margin: .5rem auto;
-    border-radius: 5px;
+  line-height: 1.5rem;
+  padding: 10px 20px;
+  margin: 0;
+  border: 1px solid #e2e5e4;
+  width: 93%;
+  margin: .5rem auto;
+  border-radius: 5px;
 }
 
 .category .collection {
@@ -140,3 +140,12 @@ input[type=password]:focus {
   font-weight: 500;
   font-size: .8rem;
 }
+
+.show {
+  display: block;
+}
+
+.category-checkbox {
+  align-items: center;
+}
+

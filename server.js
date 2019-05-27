@@ -13,23 +13,9 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Handlebars
-// var hbsHelpers = exphbs.create({
-//   helpers: require("./helpers/handlebars.js").helpers,
-//   defaultLayout: "main",
-//   extname: ".hbs"
-// });
 
-// app.engine(".hbs", hbsHelpers.engine);
-// app.set("view engine", ".hbs");
-
-// Handlebars
-app.engine(
-  "hbs",
-  exphbs({
-    defaultLayout: "main",
-    extname: ".hbs"
-  })
-);
+var handlebars = require("./helpers/handlebars.js")(exphbs);
+app.engine(".hbs", handlebars.engine);
 app.set("view engine", ".hbs");
 
 // Routes
@@ -37,7 +23,7 @@ require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 require("./routes/seed")(app);
 
-var syncOptions = { force: true };
+var syncOptions = { force: false };
 
 
 // If running a test, set syncOptions.force to true
@@ -47,7 +33,7 @@ if (process.env.NODE_ENV === "test") {
 }
 
 // Starting the server, syncing our models ------------------------------------/
-db.sequelize.sync(syncOptions).then(function () {
+// db.sequelize.sync(syncOptions).then(function () {
 app.listen(PORT, function () {
   console.log(
     "Listening on port %s. http://localhost:%s/",
@@ -55,6 +41,6 @@ app.listen(PORT, function () {
     PORT
   );
 });
-});
+// });
 
 module.exports = app;

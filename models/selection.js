@@ -4,7 +4,15 @@ module.exports = function (sequelize, DataTypes) {
     category: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        len: [1]
+      }
     },
+    active: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    }
   });
 
   Selection.associate = function (models) {

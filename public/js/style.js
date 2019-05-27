@@ -1,36 +1,48 @@
 $(document).ready(function () {
   M.AutoInit();
+  selectOnLoad();
 
+  $(document).on("change", ".category-checkbox", updateCategory);
   $(document).on("dblclick", ".todo-item", editTodo);
   // $(document).on("keyup", ".todo-item", finishEdit);
   $(document).on("blur", ".todo-item", cancelEdit);
   // $(document).on("click", ".todo-item", completeTodo);
-  $(document).on("click", ".category-title", promptOptions);
-  // $(document).on("change", ".cat-options", selectCat);
-  $(document).on("blur", ".cat-options", cancelCatEdit);
   $(document).on("click", ".new-task-btn", promptNew);
-  $(document).on("focusout", ".new-task-input", cancelNew);
+  $(document).on("blur", ".new-task", cancelNew);
 
 
-  if ($(".cat-options").val() === "") {
-    var el = ".collection-header, .btn-large, select, option";
-    console.log($(".cat-options").val());
-
-    $(el).addClass("grey darken-2");
-
-    var options = $(".cat-options");
-    $(options).show();
-    $(options).siblings().hide();
-
-  } else {
-    console.log("not empty");
-    console.log($(".cat-options").val());
-
-    $(el).removeClass("grey darken-2");
-    $(el).addClass("green");
-    $(options).hide();
-    $(options).siblings().show();
+  // ===== Selection Code =====
+  function selectOnLoad() {
+    $(".category-title").each(function () {
+      var value = $(this).text();
+      var active = $("input[type=checkbox][value=" + value + "]");
+      active.attr("checked", "checked");
+    });
   }
+
+  // ***This isn't the best way to do this. Update after seeking advice***
+  /**
+   * If there is a way to update only the changed items on submit that would be ideal. 
+   * As it is I can only think how to update all selections or one at a time
+   */
+  function updateCategory() {
+    var data = {};
+
+    data.id = $(this).children("input").attr("name");
+    data.active = $(this).children("input").prop("checked");
+
+    $.ajax({
+      url: "/api/selection/:id",
+      method: "PUT",
+      data: data
+    }).then(function () {
+      console.log("Updated active status");
+      location.reload();
+    });
+
+  }
+
+    // ===== Task Code =====
 
   // This function handles showing the input box for a user to edit a todo
   function editTodo() {
@@ -72,26 +84,6 @@ $(document).ready(function () {
     $(this).closest("li").removeClass("edit-input");
   }
 
-  function promptOptions() {
-    $(this).hide();
-    $(this).siblings().show();
-  }
-
-  // >>>>> moved to index.js
-  // function selectCat() {
-  //   var selected = $(".cat-options option:selected").val();
-  //   $(this).siblings("h5").text(selected);
-
-  //   $(this).hide();
-  //   $(this).siblings().show();
-  // }
-
-  function cancelCatEdit() {
-    $(this).hide();
-    $(this).siblings().show();
-  }
-
-  // >>>>> moved to index.js
   // function completeTodo() {
   //   // var currentTodo = $(this).data("id");
   //   var checked = $(this).children("input[type=checkbox]").prop("checked");
@@ -102,14 +94,19 @@ $(document).ready(function () {
 
   function promptNew() {
     var input = $(".add-todo-item").children("input[type=text]");
+    var section = $(this).closest("section");
+    section.addClass("new");
 
-    $(".add-todo-item").show();
+    $(".new .add-todo-item").show();
+
     input.focus();
+    section.removeClass("new");
   }
 
   function cancelNew() {
     $(".add-todo-item").hide();
     $(".new-task").val("");
   }
+
 
 });
