@@ -33,8 +33,8 @@ app.engine(
 app.set("view engine", ".hbs");
 
 // Routes
-require("./routes/htmlRoutes")(app);
 require("./routes/apiRoutes")(app);
+require("./routes/htmlRoutes")(app);
 require("./routes/seed")(app);
 
 var syncOptions = { force: true };
