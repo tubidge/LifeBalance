@@ -3,7 +3,8 @@ $(document).ready(function () {
   selectOnLoad();
 
   $(document).on("click", ".sidenav-trigger", limitCategory);
-  $(document).on("change", ".category-checkbox", updateCategory, limitCategory);
+  $(document).on("change", ".category-checkbox", limitCategory);
+  $(document).on("submit", ".category-form", updateCategory);
   $(document).on("dblclick", ".todo-item", editTodo);
   // $(document).on("keyup", ".todo-item", finishEdit);
   $(document).on("blur", ".todo-item", cancelEdit);
@@ -19,7 +20,6 @@ $(document).ready(function () {
       var value = $(this).text();
       var active = $("input[type=checkbox][value=" + value + "]");
       active.attr("checked", "checked");
-
     });
   }
 
@@ -34,14 +34,18 @@ $(document).ready(function () {
     data.id = $(this).children("input").attr("name");
     data.active = $(this).children("input").prop("checked");
 
-    $.ajax({
-      url: "/api/selection/:id",
-      method: "PUT",
-      data: data
-    }).then(function () {
-      console.log("Updated active status");
-      location.reload();
-    });
+    console.log(this);
+    console.log(data);
+
+    // $.ajax({
+    //   url: "/api/selection/:id",
+    //   method: "PUT",
+    //   data: data
+    // }).then(function () {
+    //   console.log("Updated active status");
+    //   location.reload();
+    // });
+
   }
 
   function limitCategory() {

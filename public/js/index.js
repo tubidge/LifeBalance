@@ -39,7 +39,7 @@ $(document).ready(function () {
       $(".new-task").submit();
 
       var data = {
-        task: $(".new-task").val().trim(),
+        task: $(this).val().trim(),
         SelectionId: $(this).data("category"),
         UserId: 1
       };
@@ -50,12 +50,10 @@ $(document).ready(function () {
         method: "POST",
         data: data
       }).then(function () {
-        // console.log(data);
         console.log("Added new task");
+        $(".new-task").val("");
+        location.reload();
       });
-
-      $(".add-todo-item").hide();
-      $(".new-task").val("");
     }
   });
 
