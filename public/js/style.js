@@ -6,20 +6,18 @@ $(document).ready(function () {
   $(document).on("change", ".category-checkbox", limitCategory);
   $(document).on("submit", ".category-form", updateCategory);
   $(document).on("dblclick", ".todo-item", editTodo);
-  // $(document).on("keyup", ".todo-item", finishEdit);
   $(document).on("blur", ".todo-item", cancelEdit);
-  // $(document).on("click", ".todo-item", completeTodo);
   $(document).on("click", ".new-task-btn", promptNew);
   $(document).on("blur", ".new-task", cancelNew);
 
-
   // ===== Selection Code =====
   function selectOnLoad() {
-
     $(".category-title").each(function () {
       var value = $(this).text();
       var active = $("input[type=checkbox][value=" + value + "]");
+
       active.attr("checked", "checked");
+
     });
   }
 
@@ -31,21 +29,20 @@ $(document).ready(function () {
   function updateCategory() {
     var data = {};
 
-    data.id = $(this).children("input").attr("name");
-    data.active = $(this).children("input").prop("checked");
+    $(".category-checkbox").each(function () {
 
-    console.log(this);
-    console.log(data);
+      data.id = $(this).children("input").attr("name");
+      data.active = $(this).children("input").prop("checked");
 
-    // $.ajax({
-    //   url: "/api/selection/:id",
-    //   method: "PUT",
-    //   data: data
-    // }).then(function () {
-    //   console.log("Updated active status");
-    //   location.reload();
-    // });
-
+      $.ajax({
+        url: "/api/selection/:id",
+        method: "PUT",
+        data: data
+      }).then(function () {
+        console.log("Updated active status");
+        location.reload();
+      });
+    });
   }
 
   function limitCategory() {
@@ -66,7 +63,6 @@ $(document).ready(function () {
     }
   }
 
-
   // ===== Task Code =====
 
   // This function handles showing the input box for a user to edit a todo
@@ -81,20 +77,6 @@ $(document).ready(function () {
     $(this).closest("li").addClass("edit-input");
   }
 
-  // >>>>> moved to index.js
-  // // This function starts updating a todo in the database if a user hits the "Enter Key"
-  // // While in edit mode
-  // function finishEdit(event) {
-  //   // var updatedTodo = $(this).data("id");
-  //   if (event.which === 13) {
-  //     var text = $(this).children("input[type='text']").val().trim();
-  //     $(this).blur();
-  //     // updateTodo(updatedTodo);
-  //     $(this).children("lable").text(text);
-  //     console.log(text);
-  //   }
-  //   $(this).closest("li").removeClass("edit-input");
-  // }
 
   // This function is called whenever a todo item is in edit mode and loses focus
   // This cancels any edits being made
@@ -109,13 +91,6 @@ $(document).ready(function () {
     $(this).closest("li").removeClass("edit-input");
   }
 
-  // function completeTodo() {
-  //   // var currentTodo = $(this).data("id");
-  //   var checked = $(this).children("input[type=checkbox]").prop("checked");
-  //   if (checked) {
-  //     $(this).fadeOut("slow");
-  //   }
-  // }
 
   function promptNew() {
     var input = $(".add-todo-item").children("input[type=text]");
