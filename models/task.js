@@ -4,13 +4,13 @@ module.exports = function (sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [1]
+        len: [2, 255]
       }
     },
     status: {
-      type: Boolean,
+      type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: 0
+      defaultValue: false
     }
   });
   Task.associate = function (models) {

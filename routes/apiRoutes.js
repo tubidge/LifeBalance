@@ -61,4 +61,25 @@ module.exports = function (app) {
       res.json(data);
     });
   });
+
+  // =====================================================
+  
+  app.put("/api/selection/:id", function (req, res) {
+  console.log(req.body.previous);    
+
+    db.Selection.update({ active: req.body.active },{ 
+
+      where: { id: req.body.id }
+    }).then(function () {
+
+      db.Selection.update({ active: req.body.prevActive },{
+        
+        where: { id: req.body.prevId }
+      }).then(function (result) {
+        res.json(result);
+        console.log("updated active");
+
+      });
+    });
+  });
 };
