@@ -16,16 +16,15 @@
           <input type="text" class="new-task" data-category="{{id}}">
         </li>
 
-        <a href=""><span class="sm-link">View All</span></a>
-        {{#each Tasks}}
-        {{!-- {{#if status}} --}}
-        <li class="todo-item collection-item">
-          <input type="checkbox" checked disabled />
-          <lable>{{task}}</lable>
-          <input type='text' class='edit' style='display: none;' />
-        </li>
-        {{!-- {{/if}} --}}
-        {{/each}}
+        <div class="todo-items-completed">
+          <a class="sm-link view-completed"><span>View All</span><span style="display: none">Hide</span></a>
+          <ul class="completed-list" style="display: none;">
+
+            {{> completed-block}}
+
+          </ul>
+        </div>
+
       </ul>
     </div>
     <div class="btn-wrapper">

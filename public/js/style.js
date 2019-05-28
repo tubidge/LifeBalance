@@ -9,6 +9,7 @@ $(document).ready(function () {
   $(document).on("blur", ".todo-item", cancelEdit);
   $(document).on("click", ".new-task-btn", promptNew);
   $(document).on("blur", ".new-task", cancelNew);
+  $(document).on("click", ".view-completed", viewCompleted);
 
   // ===== Selection Code =====
   function selectOnLoad() {
@@ -46,7 +47,7 @@ $(document).ready(function () {
   }
 
   function limitCategory() {
-    var count = $("input:checkbox:checked").length;
+    var count = $(".category-checkbox input:checkbox:checked").length;
     var input = $(".category-checkbox input[type=checkbox]");
 
     if (count >= 3) {
@@ -108,5 +109,13 @@ $(document).ready(function () {
     $(".new-task").val("");
   }
 
+  // ===== Completed Task Code =====
+
+  function viewCompleted() {
+
+    $(this).children("span").toggle();
+    $(this).siblings(".completed-list").slideToggle();
+
+  }
 
 });
