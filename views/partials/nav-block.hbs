@@ -1,10 +1,12 @@
+{{!-- if user is logged in display nav bar --}}
+{{!-- {{#if active}} --}}
 <nav>
-  <div class="nav-wrapper grey darken-1">
+  <div class="nav-wrapper z-depth-2 grey darken-1">
     <div class="container">
       {{!-- <a href="#" class="brand-logo left">Logo</a> --}}
       <a href="#" data-target="slide-out" class="sidenav-trigger brand-logo left"><i class="material-icons">menu</i></a>
       <ul id="" class="right hide-on-med-and-down">
-        <li><a href="/login">Logout</a></li>
+        <li><a href="/logout">Logout</a></li>
       </ul>
     </div>
   </div>
@@ -17,7 +19,7 @@
         {{!-- <img src="images/office.jpg"> --}}
       </div>
       <a href="#user"><img class="circle" src="images/yuna.jpg"></a>
-      <a href="#name"><span class="white-text name">John Doe</span></a>
+      <a href="#name"><span class="white-text name">{{user}}</span></a>
       <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
     </div>
   </li>
@@ -43,5 +45,5 @@
       <button type="submit" class="btn grey darken-1">Update</button>
     </li>
   </form>
-
 </ul>
+{{!-- {{/if}} --}}

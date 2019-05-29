@@ -149,3 +149,7 @@ input[type=password]:focus {
   margin: 3rem auto;
   display: block;
 }
+
+.collection {
+  border: none;
+}
