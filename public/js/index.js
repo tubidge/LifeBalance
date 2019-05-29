@@ -67,6 +67,9 @@ $(document).ready(function () {
       // updateTodo(updatedTodo);
       $(this).children("lable").text(text);
       console.log(text);
+      
+    
+    
     }
     $(this).closest("li").removeClass("edit-input");
   }
