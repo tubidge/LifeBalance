@@ -29,24 +29,24 @@ module.exports = function (app) {
 
 
   // Signup
-  app.get("/signup", function (req, res) {
-    res.render("signup");
-  });
+  // app.get("/signup", function (req, res) {
+  //   res.render("signup");
+  // });
 
-  app.post("/signup", function (req, res) {
-    console.log(req.body);
+  // app.post("/signup", function (req, res) {
+  //   console.log(req.body);
 
-    db.User.create(req.body).then(function (userData) {
-      res.json(userData);
-      console.log(userData);
+  //   db.User.create(req.body).then(function (userData) {
+  //     res.json(userData);
+  //     console.log(userData);
 
-    });
-  });
+  //   });
+  // });
 
-  // Login
-  app.get("/login", function (req, res) {
-    res.render("login");
-  });
+  // // Login
+  // app.get("/login", function (req, res) {
+  //   res.render("login");
+  // });
 
 
   // Render 404 page for any unmatched routes

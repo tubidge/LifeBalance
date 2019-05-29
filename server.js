@@ -6,7 +6,7 @@ var session = require("express-session");
 var bodyParser = require("body-parser");
 require("dotenv").config();
 
-// var db = require("./models");
+var db = require("./models");
 
 var app = express();
 var PORT = process.env.PORT || 3000;
@@ -18,12 +18,12 @@ app.get("/", function (req, res) {
 });
 
 
-app.listen(PORT, function (err) {
+// app.listen(PORT, function (err) {
 
-  if (!err) { console.log("Site is live"); }
-  else { console.log(err); }
+//   if (!err) { console.log("Site is live"); }
+//   else { console.log(err); }
 
-});
+// });
 
 // Middleware
 app.use(express.urlencoded({ extended: false }));
@@ -45,18 +45,18 @@ app.use(passport.session()); // persistent login sessions
 
 
 //Models
-var models = require("./app/models");
+// var models = require("./app/models");
 
-//Sync Database
-models.sequelize.sync().then(function () {
+// //Sync Database
+// models.sequelize.sync().then(function () {
 
-  console.log("Nice! Database looks fine");
+//   console.log("Nice! Database looks fine");
 
-}).catch(function (err) {
+// }).catch(function (err) {
 
-  console.log(err, "Something went wrong with the Database Update!");
+//   console.log(err, "Something went wrong with the Database Update!");
 
-});
+// });
 
 
 
@@ -71,17 +71,13 @@ require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 require("./routes/seed")(app);
 
-<<<<<<< HEAD
 //load passport strategies
-require("./app/config/passport/passport.js")(passport, models.user);
-var authRoute = require("./app/routes/auth.js")(app, passport);
+require("./config/passport/passport.js")(passport, db.user);
+var authRoute = require("./routes/auth.js")(app, passport);
 
 
 var syncOptions = { force: false };
 
-=======
-var syncOptions = { force: false };
->>>>>>> fc6107e6bec151f7032447ac35c8f128140fc0e5
 
 
 // If running a test, set syncOptions.force to true
@@ -91,15 +87,15 @@ if (process.env.NODE_ENV === "test") {
 }
 
 // Starting the server, syncing our models ------------------------------------/
-// db.sequelize.sync(syncOptions).then(function () {
-// app.listen(PORT, function () {
-//   console.log(
-//     "Listening on port %s. http://localhost:%s/",
-//     PORT,
-//     PORT
-//   );
-// });
-// });
+db.sequelize.sync(syncOptions).then(function () {
+  app.listen(PORT, function () {
+    console.log(
+      "Listening on port %s. http://localhost:%s/",
+      PORT,
+      PORT
+    );
+  });
+});
 
 module.exports = app;
 
