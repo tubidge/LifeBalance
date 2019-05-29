@@ -32,18 +32,14 @@ $(document).ready(function () {
 
   // jQuery for new task
   $(".new-task").keydown(function (event) {
-
     if (event.which === 13) {
       event.preventDefault();
-
       $(".new-task").submit();
-
       var data = {
         task: $(this).val().trim(),
         SelectionId: $(this).data("category"),
         UserId: 1
       };
-
       // making ajax request with new task data
       $.ajax({
         url: "/api/todos",
@@ -52,6 +48,7 @@ $(document).ready(function () {
       }).then(function () {
         console.log("Added new task");
         $(".new-task").val("");
+
         location.reload();
       });
     }
@@ -60,23 +57,46 @@ $(document).ready(function () {
   // This function starts updating a todo in the database if a user hits the "Enter Key"
   // While in edit mode
   function finishEdit(event) {
-    // var updatedTodo = $(this).data("id");
+    var updatedTodo = $(this).data("id");
     if (event.which === 13) {
       var text = $(this).children("input[type='text']").val().trim();
       $(this).blur();
       // updateTodo(updatedTodo);
       $(this).children("lable").text(text);
+      console.log(updatedTodo);
       console.log(text);
+      $.ajax({
+        url: ("/api/todos/:id"),
+        method: "PUT",
+        data: {
+          id: updatedTodo,
+          task: text
+        }
+      }).then(function () {
+        console.log("Task updated.");
+        location.reload();
+      });
     }
     $(this).closest("li").removeClass("edit-input");
   }
 
 
   function completeTodo() {
-    // var currentTodo = $(this).data("id");
+    var currentTodo = $(this).data("id");
     var checked = $(this).children("input[type=checkbox]").prop("checked");
     if (checked) {
       $(this).fadeOut("slow");
+      $.ajax({
+        url: "/api/todos/complete/:id",
+        method: "PUT",
+        data: {
+          id: currentTodo,
+          status: checked
+        }
+      }).then(function () {
+        console.log("Task completed.");
+        // location.reload();
+      });
     }
   }
   /**
