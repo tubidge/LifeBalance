@@ -4,18 +4,18 @@ var exphbs = require("express-handlebars");
 var passport = require("passport");
 var session = require("express-session");
 var bodyParser = require("body-parser");
-require("dotenv").config();
+// require("dotenv").config();
 
 var db = require("./models");
 
 var app = express();
 var PORT = process.env.PORT || 3000;
 
-app.get("/", function (req, res) {
+// app.get("/", function (req, res) {
 
-  res.send("Welcome to Passport with Sequelize");
+//   res.send("Welcome to Passport with Sequelize");
 
-});
+// });
 
 
 // app.listen(PORT, function (err) {
@@ -31,15 +31,13 @@ app.use(express.json());
 app.use(express.static("public"));
 
 //For BodyParser
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.json());
 
 // For Passport
 
 app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true })); // session secret
-
 app.use(passport.initialize());
-
 app.use(passport.session()); // persistent login sessions
 
 
@@ -59,7 +57,6 @@ app.use(passport.session()); // persistent login sessions
 // });
 
 
-
 // Handlebars
 
 var handlebars = require("./helpers/handlebars.js")(exphbs);
@@ -67,18 +64,15 @@ app.engine(".hbs", handlebars.engine);
 app.set("view engine", ".hbs");
 
 // Routes
+require("./routes/auth.js")(app, passport);
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 require("./routes/seed")(app);
 
 //load passport strategies
-require("./config/passport/passport.js")(passport, db.user);
-var authRoute = require("./routes/auth.js")(app, passport);
+require("./config/passport/passport.js")(passport, db.User);
 
-
-var syncOptions = { force: false };
-
-
+var syncOptions = { force: true };
 
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`
@@ -87,15 +81,15 @@ if (process.env.NODE_ENV === "test") {
 }
 
 // Starting the server, syncing our models ------------------------------------/
-db.sequelize.sync(syncOptions).then(function () {
-  app.listen(PORT, function () {
-    console.log(
-      "Listening on port %s. http://localhost:%s/",
-      PORT,
-      PORT
-    );
-  });
+// db.sequelize.sync(syncOptions).then(function () {
+app.listen(PORT, function () {
+  console.log(
+    "Listening on port %s. http://localhost:%s/",
+    PORT,
+    PORT
+  );
 });
+// });
 
 module.exports = app;
 
