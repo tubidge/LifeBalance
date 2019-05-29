@@ -29,29 +29,29 @@ module.exports = function (app) {
     db.Task.create(req.body).then(function (data) {
       res.json(data);
     });
-  }); 
+  });
 
   //update the completion status of the task
   app.put("/api/todos/complete/:id", function (req, res) {
     db.Task.update({
       status: req.body.status
-    },{
-      where: { id: req.params.id }
-    }).then(function(data){
-      res.json(data);
-    });
+    }, {
+        where: { id: req.body.id }
+      }).then(function (data) {
+        res.json(data);
+      });
   });
-  
+
   //update the task body
-  app.put("/api/todos/:id", function(req, res){
+  app.put("/api/todos/:id", function (req, res) {
     //update the body of task at id
     db.Task.update({
       task: req.body.task
-    },{
-      where: { id: req.params.id }
-    }).then(function(data){
-      res.json(data);
-    });
+    }, {
+        where: { id: req.body.id }
+      }).then(function (data) {
+        res.json(data);
+      });
   });
 
 
@@ -63,17 +63,17 @@ module.exports = function (app) {
   });
 
   // =====================================================
-  
-  app.put("/api/selection/:id", function (req, res) {
-  console.log(req.body.previous);    
 
-    db.Selection.update({ active: req.body.active },{ 
+  app.put("/api/selection/:id", function (req, res) {
+    console.log(req.body.previous);
+
+    db.Selection.update({ active: req.body.active }, {
 
       where: { id: req.body.id }
     }).then(function () {
 
-      db.Selection.update({ active: req.body.prevActive },{
-        
+      db.Selection.update({ active: req.body.prevActive }, {
+
         where: { id: req.body.prevId }
       }).then(function (result) {
         res.json(result);
