@@ -10,7 +10,8 @@ $(document).ready(function () {
   selectOnLoad();
 
   $(document).on("click", ".sidenav-trigger", limitCategory);
-  $(document).on("change", ".category-checkbox", updateCategory, limitCategory);
+  $(document).on("change", ".category-checkbox", limitCategory);
+  $(document).on("submit", ".category-form", updateCategory);
   $(document).on("dblclick", ".todo-item", editTodo);
   $(document).on("keyup", ".todo-item", finishEdit);
   $(document).on("blur", ".todo-item", cancelEdit);
@@ -38,21 +39,24 @@ $(document).ready(function () {
   function updateCategory() {
     var data = {};
 
-    data.id = $(this).children("input").attr("name");
-    data.active = $(this).children("input").prop("checked");
+    $(".category-checkbox").each(function () {
 
-    $.ajax({
-      url: "/api/selection/:id",
-      method: "PUT",
-      data: data
-    }).then(function () {
-      console.log("Updated active status");
-      location.reload();
+      data.id = $(this).children("input").attr("name");
+      data.active = $(this).children("input").prop("checked");
+
+      $.ajax({
+        url: "/api/selection/:id",
+        method: "PUT",
+        data: data
+      }).then(function () {
+        console.log("Updated active status");
+        location.reload();
+      });
     });
   }
 
   function limitCategory() {
-    var count = $("input:checkbox:checked").length;
+    var count = $(".category-checkbox input:checkbox:checked").length;
     var input = $(".category-checkbox input[type=checkbox]");
 
     if (count >= 3) {
@@ -129,6 +133,7 @@ $(document).ready(function () {
   // While in edit mode
   function finishEdit(event) {
     var updatedTodo = $(this).data("id");
+
     if (event.which === 13) {
       var text = $(this).children("input[type='text']").val().trim();
       $(this).blur();
@@ -136,6 +141,7 @@ $(document).ready(function () {
       $(this).children("lable").text(text);
       console.log(updatedTodo);
       console.log(text);
+
       $.ajax({
         url: ("/api/todos/:id"),
         method: "PUT",
@@ -148,6 +154,7 @@ $(document).ready(function () {
         location.reload();
       });
     }
+
     $(this).closest("li").removeClass("edit-input");
   }
 
