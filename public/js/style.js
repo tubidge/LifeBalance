@@ -11,7 +11,6 @@
   // $(document).on("click", ".new-task-btn", promptNew);
   // $(document).on("blur", ".new-task", cancelNew);
 
-
   // ===== Selection Code =====
   // function selectOnLoad() {
 

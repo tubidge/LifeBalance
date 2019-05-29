@@ -144,3 +144,8 @@ input[type=password]:focus {
 .category-checkbox {
   align-items: center;
 }
+
+.category-form .btn {
+  margin: 3rem auto;
+  display: block;
+}

@@ -36,7 +36,7 @@ module.exports = function (app) {
     db.Task.update({
       status: req.body.status
     }, {
-        where: { id: req.body.id }
+    where: { id: req.body.id }
       }).then(function (data) {
         res.json(data);
       });
