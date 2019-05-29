@@ -1,116 +1,95 @@
 //load bcrypt
 var bCrypt = require("bcrypt-nodejs");
 
-
 module.exports = function (passport, user) {
 
+  var User = user;
+  var LocalStrategy = require("passport-local").Strategy;
 
-     var User = user;
+  passport.use("local-signup", new LocalStrategy(
+    {
+      usernameField: "email",
+      passwordField: "password",
+      passReqToCallback: true // allows us to pass back the entire request to the callback
+    },
 
-     var LocalStrategy = require("passport-local").Strategy;
+    //serialize
+    // passport.serializeUser(function (user, done) {
+    //   done(null, user.id);
+    // }),
+
+    // // deserialize user 
+    // passport.deserializeUser(function (id, done) {
+
+    //   User.findById(id).then(function (user) {
+
+    //     if (user) {
+
+    //       done(null, user.get());
+
+    //     } else {
+
+    //       done(user.errors, null);
+
+    //     }
+
+    //   });
+
+    // }),
 
 
-     passport.use("local-signup", new LocalStrategy(
+
+    function (req, email, password, done) {
+      var generateHash = function (password) {
+
+        return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
+      };
+
+      User.findOne({
+        where: {
+          email: email
+        }
+      }).then(function (user) {
+
+        if (user) {
+
+          return done(null, false, {
+            message: "That email is already taken"
+          });
+
+        } else {
+
+          var userPassword = generateHash(password);
+
+          var data =
 
           {
+            email: email,
 
-               usernameField: "email",
+            password: userPassword,
 
-               passwordField: "password",
+            firstname: req.body.firstname,
 
-               passReqToCallback: true // allows us to pass back the entire request to the callback
+            lastname: req.body.lastname
 
-          },
+          };
 
-          //serialize
-          passport.serializeUser(function (user, done) {
+          User.create(data).then(function (newUser, created) {
 
-               done(null, user.id);
+            if (!newUser) {
 
-          }),
+              return done(null, false);
 
-          // deserialize user 
-          passport.deserializeUser(function (id, done) {
+            }
 
-               User.findById(id).then(function (user) {
+            if (newUser) {
 
-                    if (user) {
+              return done(null, newUser);
 
-                         done(null, user.get());
-
-                    } else {
-
-                         done(user.errors, null);
-
-                    }
-
-               });
-
-          }),
-
-
-
-          function (req, email, password, done) {
-
-               var generateHash = function (password) {
-
-                    return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
-
-               };
-
-
-
-               User.findOne({
-                    where: {
-                         email: email
-                    }
-               }).then(function (user) {
-
-                    if (user) {
-
-                         return done(null, false, {
-                              message: "That email is already taken"
-                         });
-
-                    } else {
-
-                         var userPassword = generateHash(password);
-
-                         var data =
-
-                         {
-                              email: email,
-
-                              password: userPassword,
-
-                              firstname: req.body.firstname,
-
-                              lastname: req.body.lastname
-
-                         };
-
-                         User.create(data).then(function (newUser, created) {
-
-                              if (!newUser) {
-
-                                   return done(null, false);
-
-                              }
-
-                              if (newUser) {
-
-                                   return done(null, newUser);
-
-                              }
-
-                         });
-
-                    }
-
-               });
-
-          }
-
-     ));
-
+            }
+          });
+        }
+      });
+    }
+  ));
 };

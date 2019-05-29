@@ -1,19 +1,30 @@
-<!DOCTYPE html>
-<html>
+<div class="col l6 offset-l3 m8 offset-m2 s12">
 
-<head>
-     <title></title>
-</head>
+  <section class="login">
+    <div class="card z-depth-4">
 
-<body>
-     <form id="signin" name="signin" method="post" action="signin">
-          <label for="email">Email Address</label>
-          <input class="text" name="email" type="text" />
-          <label for="password">Password</label>
-          <input name="password" type="password" />
-          <input class="btn" type="submit" value="Sign In" />
-     </form>
+      <ul class="collection with-header">
+        <li class="collection-header light-green darken-1">
+          <h5>Sign In</h5>
+        </li>
 
-</body>
+        <form id="signin" method="post" action="/signin">
+          <li class="collection-item">
+            <input class="text" name="email" type="text" placeholder="Email Address" />
+          </li>
+          <li class="collection-item">
+            <input name="password" type="password" placeholder="Password" />
+          </li>
 
-</html>
+          <div class="btn-wrapper">
+            <button type="submit" class="btn light-green darken-1">Signin</button>
+            <a href="/signup"><span class="sm-link">Signup</span></a>
+          </div>
+        </form>
+
+      </ul>
+
+    </div>
+  </section>
+
+</div>

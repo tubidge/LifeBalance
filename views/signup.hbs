@@ -1,22 +1,36 @@
 <div class="col l6 offset-l3 m8 offset-m2 s12">
 
-<head>
-  <title></title>
-</head>
 
-<body>
-  <form id="signup" name="signup" method="post" action="/signup">
-    <label for="email">Email Address</label>
-    <input class="text" name="email" type="email" />
-    <label for="firstname">Firstname</label>
-    <input name="firstname" type="text" />
-    <label for="lastname">Lastname</label>
-    <input name="lastname" type="text" />
-    <label for="password">Password</label>
-    <input name="password" type="password" />
-    <input class="btn" type="submit" value="Sign Up" />
-  </form>
+  <section class="login">
+    <div class="card z-depth-4">
 
-</body>
+      <ul class="collection with-header">
+        <li class="collection-header light-green darken-1">
+          <h5>Sign Up</h5>
+        </li>
 
-</html>
+        <form id="signup" name="signup" method="post" action="/signup">
+
+          <li class="collection-item">
+            <input class="text" name="email" type="email" placeholder="Email address" />
+          </li>
+          <li class="collection-item">
+            <input name="firstname" type="text" placeholder="First name" />
+          </li>
+          <li class="collection-item">
+            <input name="lastname" type="text" placeholder="Last name" />
+          </li>
+          <li class="collection-item">
+            <input name="password" type="password" placeholder="Password" />
+          </li>
+          <div class="btn-wrapper">
+            <button type="submit" class="btn light-green darken-1">Signup</button>
+            <a href="/signin"><span class="sm-link">Signin</span></a>
+          </div>
+
+        </form>
+
+    </div>
+  </section>
+
+</div>

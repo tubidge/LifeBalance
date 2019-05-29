@@ -14,6 +14,8 @@ module.exports = function (app) {
   // Homepage
   app.get("/", function (req, res) {
 
+    console.log(req.session);
+
     db.Selection.findAll({
       include: [db.Task]
     }).then(function (dataSelect) {
