@@ -1,12 +1,18 @@
 
 module.exports = function (sequelize, DataTypes) {
   var Selection = sequelize.define("Selection", {
-    UserSelection: {
+    category: {
       type: DataTypes.STRING,
       allowNull: false,
-
+      validate: {
+        len: [1]
+      }
     },
-
+    active: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    }
   });
 
   Selection.associate = function (models) {

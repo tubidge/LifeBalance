@@ -61,30 +61,17 @@ models.sequelize.sync().then(function () {
 
 
 // Handlebars
-// var hbsHelpers = exphbs.create({
-//   helpers: require("./helpers/handlebars.js").helpers,
-//   defaultLayout: "main",
-//   extname: ".hbs"
-// });
 
-// app.engine(".hbs", hbsHelpers.engine);
-// app.set("view engine", ".hbs");
-
-// Handlebars
-app.engine(
-  "hbs",
-  exphbs({
-    defaultLayout: "main",
-    extname: ".hbs"
-  })
-);
+var handlebars = require("./helpers/handlebars.js")(exphbs);
+app.engine(".hbs", handlebars.engine);
 app.set("view engine", ".hbs");
 
 // Routes
-require("./routes/htmlRoutes")(app);
 require("./routes/apiRoutes")(app);
+require("./routes/htmlRoutes")(app);
 require("./routes/seed")(app);
 
+<<<<<<< HEAD
 //load passport strategies
 require("./app/config/passport/passport.js")(passport, models.user);
 var authRoute = require("./app/routes/auth.js")(app, passport);
@@ -92,12 +79,15 @@ var authRoute = require("./app/routes/auth.js")(app, passport);
 
 var syncOptions = { force: false };
 
+=======
+var syncOptions = { force: false };
+>>>>>>> fc6107e6bec151f7032447ac35c8f128140fc0e5
 
 
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`
 if (process.env.NODE_ENV === "test") {
-  syncOptions.force = false;
+  syncOptions.force = true;
 }
 
 // Starting the server, syncing our models ------------------------------------/

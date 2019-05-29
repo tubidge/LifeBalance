@@ -1,15 +1,69 @@
 $(document).ready(function () {
   M.AutoInit();
+  selectOnLoad();
 
+  $(document).on("click", ".sidenav-trigger", limitCategory);
+  $(document).on("change", ".category-checkbox", updateCategory, limitCategory);
   $(document).on("dblclick", ".todo-item", editTodo);
-  $(document).on("keyup", ".todo-item", finishEdit);
+  // $(document).on("keyup", ".todo-item", finishEdit);
   $(document).on("blur", ".todo-item", cancelEdit);
-  $(document).on("click", ".todo-item", completeTodo);
-  $(document).on("click", ".category-title", promptOptions);
-  $(document).on("change", ".cat-options", selectCat);
-  $(document).on("blur", ".cat-options", cancelCatEdit);
+  // $(document).on("click", ".todo-item", completeTodo);
   $(document).on("click", ".new-task-btn", promptNew);
-  $(document).on("focusout", ".new-task-input", cancelNew);
+  $(document).on("blur", ".new-task", cancelNew);
+
+
+  // ===== Selection Code =====
+  function selectOnLoad() {
+
+    $(".category-title").each(function () {
+      var value = $(this).text();
+      var active = $("input[type=checkbox][value=" + value + "]");
+      active.attr("checked", "checked");
+
+    });
+  }
+
+  // ***This isn't the best way to do this. Update after seeking advice***
+  /**
+   * If there is a way to update only the changed items on submit that would be ideal. 
+   * As it is I can only think how to update all selections or one at a time
+   */
+  function updateCategory() {
+    var data = {};
+
+    data.id = $(this).children("input").attr("name");
+    data.active = $(this).children("input").prop("checked");
+
+    $.ajax({
+      url: "/api/selection/:id",
+      method: "PUT",
+      data: data
+    }).then(function () {
+      console.log("Updated active status");
+      location.reload();
+    });
+  }
+
+  function limitCategory() {
+    var count = $("input:checkbox:checked").length;
+    var input = $(".category-checkbox input[type=checkbox]");
+
+    if (count >= 3) {
+
+      input.each(function () {
+        var selected = $(this).prop("checked");
+        if (!selected) {
+          $(this).prop("disabled", true);
+        }
+      });
+
+    } else {
+      input.prop("disabled", false);
+    }
+  }
+
+
+  // ===== Task Code =====
 
   // This function handles showing the input box for a user to edit a todo
   function editTodo() {
@@ -23,19 +77,20 @@ $(document).ready(function () {
     $(this).closest("li").addClass("edit-input");
   }
 
-  // This function starts updating a todo in the database if a user hits the "Enter Key"
-  // While in edit mode
-  function finishEdit(event) {
-    // var updatedTodo = $(this).data("id");
-    if (event.which === 13) {
-      var text = $(this).children("input[type='text']").val().trim();
-      $(this).blur();
-      // updateTodo(updatedTodo);
-      $(this).children("lable").text(text);
-      console.log(text);
-    }
-    $(this).closest("li").removeClass("edit-input");
-  }
+  // >>>>> moved to index.js
+  // // This function starts updating a todo in the database if a user hits the "Enter Key"
+  // // While in edit mode
+  // function finishEdit(event) {
+  //   // var updatedTodo = $(this).data("id");
+  //   if (event.which === 13) {
+  //     var text = $(this).children("input[type='text']").val().trim();
+  //     $(this).blur();
+  //     // updateTodo(updatedTodo);
+  //     $(this).children("lable").text(text);
+  //     console.log(text);
+  //   }
+  //   $(this).closest("li").removeClass("edit-input");
+  // }
 
   // This function is called whenever a todo item is in edit mode and loses focus
   // This cancels any edits being made
@@ -50,42 +105,29 @@ $(document).ready(function () {
     $(this).closest("li").removeClass("edit-input");
   }
 
-  function promptOptions() {
-    $(this).hide();
-    $(this).siblings().show();
-  }
-
-  function selectCat() {
-    var selected = $(".cat-options option:selected").val();
-    $(this).siblings("h5").text(selected);
-
-    $(this).hide();
-    $(this).siblings().show();
-  }
-
-  function cancelCatEdit() {
-    $(this).hide();
-    $(this).siblings().show();
-  }
-
-  function completeTodo() {
-    // var currentTodo = $(this).data("id");
-    var checked = $(this).children("input[type=checkbox]").prop("checked");
-    if (checked) {
-      $(this).fadeOut("slow");
-    }
-  }
+  // function completeTodo() {
+  //   // var currentTodo = $(this).data("id");
+  //   var checked = $(this).children("input[type=checkbox]").prop("checked");
+  //   if (checked) {
+  //     $(this).fadeOut("slow");
+  //   }
+  // }
 
   function promptNew() {
     var input = $(".add-todo-item").children("input[type=text]");
+    var section = $(this).closest("section");
+    section.addClass("new");
 
-    $(".add-todo-item").show();
+    $(".new .add-todo-item").show();
+
     input.focus();
+    section.removeClass("new");
   }
 
   function cancelNew() {
     $(".add-todo-item").hide();
     $(".new-task").val("");
   }
+
 
 });

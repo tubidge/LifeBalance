@@ -14,6 +14,10 @@ h5,
   color: #fff;
 }
 
+.row {
+  margin-top: 10rem; 
+}
+
 .sm-link {
   font-size: .8rem;
   color: #9b9b9b;
@@ -60,13 +64,13 @@ h5,
 }
 
 .collection .collection-item {
-    line-height: 1.5rem;
-    padding: 10px 20px;
-    margin: 0;
-    border: 1px solid #e2e5e4;
-    width: 93%;
-    margin: .5rem auto;
-    border-radius: 5px;
+  line-height: 1.5rem;
+  padding: 10px 20px;
+  margin: 0;
+  border: 1px solid #e2e5e4;
+  width: 93%;
+  margin: .5rem auto;
+  border-radius: 5px;
 }
 
 .category .collection {
@@ -123,14 +127,6 @@ input[type=password]:focus {
   height: 2.5rem;
 }
 
-.category .collection-header h5:hover {
-  transition-delay: .1s;
-  border: 1px solid #fff;
-  opacity: .5;
-  padding: .8rem;
-  border-radius: 5px;
-}
-
 .collection-header select,
 .collection-header option {
     /* -webkit-appearance:none; */
@@ -139,4 +135,12 @@ input[type=password]:focus {
   opacity: .7;
   font-weight: 500;
   font-size: .8rem;
+}
+
+.show {
+  display: block;
+}
+
+.category-checkbox {
+  align-items: center;
 }

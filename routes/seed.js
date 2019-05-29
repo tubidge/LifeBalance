@@ -7,7 +7,10 @@ var users = [
 ];
 
 var categories = [
-  { category: "Work" },
+  {
+    category: "Work",
+    active: true
+  },
   { category: "Home" },
   { category: "Social" }
 ];

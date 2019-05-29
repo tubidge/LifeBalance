@@ -4305,9 +4305,9 @@ nav .nav-wrapper {
 }
 
 @media only screen and (min-width: 993px) {
-  nav a.sidenav-trigger {
+  /* nav a.sidenav-trigger {
     display: none;
-  }
+  } */
 }
 
 nav .sidenav-trigger {
@@ -4470,10 +4470,10 @@ nav .input-field label.active i {
   nav.nav-extended .nav-wrapper {
     min-height: 64px;
   }
-  nav, nav .nav-wrapper i, nav a.sidenav-trigger, nav a.sidenav-trigger i {
+  /* nav, nav .nav-wrapper i, nav a.sidenav-trigger, nav a.sidenav-trigger i {
     height: 64px;
     line-height: 64px;
-  }
+  } */
   .navbar-fixed {
     height: 64px;
   }
@@ -7371,7 +7371,7 @@ input[type=range]::-ms-thumb {
 
 .sidenav li > a {
   color: rgba(0, 0, 0, 0.87);
-  display: block;
+  display: flex;
   font-size: 14px;
   font-weight: 500;
   height: 48px;
