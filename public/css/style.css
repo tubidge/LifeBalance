@@ -1,6 +1,7 @@
 body {
   font-family: 'Montserrat', sans-serif;  
-  background-color: #f1f2f1;
+  /* background-color: #f1f2f1; */
+  background-color: #dbdbdb;
 }
 
 h5,
@@ -146,6 +147,10 @@ input[type=password]:focus {
 }
 
 .category-form .btn {
-  margin: 3rem auto;
+  margin: 3rem 2rem;
   display: block;
+}
+
+.collection {
+  border: none;
 }
