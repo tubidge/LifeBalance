@@ -33,10 +33,12 @@ module.exports = function (app) {
 
   //update the completion status of the task
   app.put("/api/todos/complete/:id", function (req, res) {
+    // console.log(req.body);
+
     db.Task.update({
-      status: req.body.status
+      completed: req.body.completed
     }, {
-    where: { id: req.body.id }
+        where: { id: req.body.id }
       }).then(function (data) {
         res.json(data);
       });
@@ -45,6 +47,8 @@ module.exports = function (app) {
   //update the task body
   app.put("/api/todos/:id", function (req, res) {
     //update the body of task at id
+    // console.log(req.body);
+
     db.Task.update({
       task: req.body.task
     }, {
