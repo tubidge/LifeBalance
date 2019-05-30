@@ -190,7 +190,7 @@ $(document).ready(function () {
         method: "PUT",
         data: {
           id: currentTodo,
-          status: checked
+          completed: checked
         }
       }).then(function () {
         console.log("Task completed.");
