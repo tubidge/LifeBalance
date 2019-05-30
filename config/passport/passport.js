@@ -108,7 +108,10 @@ module.exports = function (passport, user) {
     User.findByPk(id).then(function (user) {
 
       if (user) {
-        done(null, user.get());
+        // done(null, user.get());
+        done(null, user.id);
+        // console.log(user.id);
+
 
       } else {
         done(user.errors, null);

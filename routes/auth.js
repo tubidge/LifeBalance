@@ -17,7 +17,7 @@ module.exports = function (app, passport) {
     successRedirect: "/",
     failureRedirect: "/dashboard"
   }), function (req, res) {
-    console.log(req.session.user);
+    // console.log(req.session.user);
 
   });
 
