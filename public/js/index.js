@@ -1,10 +1,3 @@
-/**
- * =====FORMS=====
- * #signup - on submit (done?)
- * #login - on submit
- * #new-task - on submit (done?)
- */
-
 $(document).ready(function () {
   M.AutoInit();
   selectOnLoad();
@@ -18,6 +11,7 @@ $(document).ready(function () {
   $(document).on("click", ".todo-item", completeTodo);
   $(document).on("click", ".new-task-btn", promptNew);
   $(document).on("blur", ".new-task", cancelNew);
+  $(document).on("click", ".view-completed", viewCompleted);
 
 
   // ===== Selection Code =====
@@ -197,21 +191,24 @@ $(document).ready(function () {
         method: "PUT",
         data: {
           id: currentTodo,
-          status: checked
+          completed: checked
         }
       }).then(function () {
         console.log("Task completed.");
+        console.log(currentTodo, checked);
         // location.reload();
       });
     }
   }
 
+  // ===== Completed Task Code =====
 
-  /**
-   * === we will need these post routes ===
-   * get "/signup" - for the "signup" page
-   * get "/login" - for the "login" page
-   */
+  function viewCompleted() {
+
+    $(this).children("span").toggle();
+    $(this).siblings(".completed-list").slideToggle();
+
+  }
 
 
 });
