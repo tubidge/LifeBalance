@@ -1,6 +1,10 @@
 {{!-- for each task in specified category --}}
 {{#each Tasks}}
+<<<<<<< HEAD
 {{#unless status}}
+=======
+{{#unless completed}}
+>>>>>>> f1340e7d46b9ca352becc0aeb6b3bb817b10c482
 <li class="todo-item collection-item" data-category="{{SelectionId}}" data-id="{{id}}">
   <input name="{{id}}" type="checkbox" />
   <lable for="{{id}}">{{task}}</lable>

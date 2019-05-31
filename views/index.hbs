@@ -8,6 +8,7 @@
 
         <li class="collection-header z-depth-2">
           <h5 class="category-title" data-category="{{id}}">{{this.category}}</h5>
+          <img src="/img/{{this.category}}.png" width="60" alt="">
         </li>
 
         {{> task-block}}
@@ -16,7 +17,15 @@
           <input type="text" class="new-task" data-category="{{id}}">
         </li>
 
-        <a href=""><span class="sm-link">View All</span></a>
+        <div class="todo-items-completed">
+          <a class="sm-link view-completed"><span>View All</span><span style="display: none">Hide</span></a>
+          <ul class="completed-list" style="display: none;">
+
+            {{> completed-block}}
+
+          </ul>
+        </div>
+
       </ul>
     </div>
     <div class="btn-wrapper">
