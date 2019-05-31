@@ -1,7 +1,6 @@
-{{!-- for each task in specified category --}}
 {{#each Tasks}}
 {{#unless status}}
-<li class="todo-item collection-item" data-category="{{SelectionId}}" data-id="{{id}}">z
+<li class="todo-item collection-item" data-category="{{SelectionId}}" data-id="{{id}}">
   <input name="{{id}}" type="checkbox" onclick="play()" />
   <lable for="{{id}}">{{task}}</lable>
   <input type='text' class='edit' style='display: none;' />
