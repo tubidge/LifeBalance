@@ -3,17 +3,21 @@ var db = require("../models");
 module.exports = function (app) {
   // // Get all examples
   app.get("/api/todos", function (req, res) {
-    db.Task.findAll({}).then(function (dbExamples) {
-      res.json(dbExamples);
+    db.Task.findAll({}).then(function (data) {
+      res.json(data);
     });
-  });
-
-
-  // =====================================================
+  }); 
 
   //create a new todo task
   app.post("/api/todos", function (req, res) {
-    db.Task.create(req.body).then(function (data) {
+    // console.log(req.body);
+
+    db.Task.create({
+      id: req.body.id,
+      task: req.body.task,
+      SelectionId: req.body.SelectionId,
+      UserId: req.session.passport.user
+    }).then(function (data) {
       res.json(data);
     });
   });
@@ -52,7 +56,6 @@ module.exports = function (app) {
     });
   });
 
-  // =====================================================
 
   app.put("/api/selection/:id", function (req, res) {
 

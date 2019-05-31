@@ -94,8 +94,7 @@ $(document).ready(function () {
       $(".new-task").submit();
       var data = {
         task: $(this).val().trim(),
-        SelectionId: $(this).data("category"),
-        UserId: 1
+        SelectionId: $(this).data("category")
       };
       // making ajax request with new task data
       $.ajax({
