@@ -1,12 +1,13 @@
 var db = require("../models");
 
+// dont touch code below here 
 module.exports = function (app) {
 
   // Homepage
   app.get("/", function (req, res) {
 
-    console.log("log from route");
-    console.log(req.session);
+    // console.log("log from route");
+    // console.log(req.session);
 
     db.Selection.findAll({
       include: [{
@@ -17,7 +18,7 @@ module.exports = function (app) {
         required: false
       }]
     }).then(function (dataSelect) {
-      console.log(dataSelect);
+      // console.log(dataSelect);
       var viewObj = {
         Selection: dataSelect
       };
