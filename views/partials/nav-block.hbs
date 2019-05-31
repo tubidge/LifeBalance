@@ -1,9 +1,8 @@
 {{!-- if user is logged in display nav bar --}}
-{{!-- {{#if active}} --}}
+{{#if User}}
 <nav>
   <div class="nav-wrapper z-depth-2 grey darken-1">
     <div class="container">
-      {{!-- <a href="#" class="brand-logo left">Logo</a> --}}
       <a href="#" data-target="slide-out" class="sidenav-trigger brand-logo left"><i class="material-icons">menu</i></a>
       <ul id="" class="right hide-on-med-and-down">
         <li><a href="/logout">Logout</a></li>
@@ -14,13 +13,10 @@
 
 <ul id="slide-out" class="sidenav">
   <li>
-    <div class="user-view">
-      <div class="background grey darken-1">
-        {{!-- <img src="images/office.jpg"> --}}
-      </div>
-      <a href="#user"><img class="circle" src="images/yuna.jpg"></a>
-      <a href="#name"><span class="white-text name">{{user}}</span></a>
-      <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
+    <div class="user-view background grey darken-1">
+      <a href="#user"><img src="/img/settings.png" width="40"></a>
+      <a href="#name"><span class="white-text name">{{User.firstname}} {{User.lastname}}</span></a>
+      <a href="#email"><span class="white-text email">{{User.email}}</span></a>
     </div>
   </li>
   {{!-- <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li> --}}
@@ -31,19 +27,20 @@
   <li><a class="subheader">Update Categories</a></li>
 
   <form class="category-form">
+    <ul>
+      {{#each Selection}}
+      <li>
+        <a class="category-checkbox" href="#!">
+          <input type="checkbox" name="{{this.id}}" value="{{this.category}}" />
+          <label for="{{this.id}}">{{this.category}}</label>
+        </a>
+      </li>
+      {{/each}}
 
-    {{#each Selection}}
-    <li>
-      <a class="category-checkbox" href="#!">
-        <input type="checkbox" name="{{this.id}}" value="{{this.category}}" />
-        <label for="{{this.id}}">{{this.category}}</label>
-      </a>
-    </li>
-    {{/each}}
-
-    <li>
-      <button type="submit" class="btn grey darken-1">Update</button>
-    </li>
+      <li>
+        <button type="submit" class="btn grey darken-1">Update</button>
+      </li>
+    </ul>
   </form>
 </ul>
-{{!-- {{/if}} --}}
+{{/if}}

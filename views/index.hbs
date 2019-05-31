@@ -18,7 +18,9 @@
         </li>
 
         <div class="todo-items-completed">
+          {{#if Tasks}}
           <a class="sm-link view-completed"><span>View All</span><span style="display: none">Hide</span></a>
+          {{/if}}
           <ul class="completed-list" style="display: none;">
 
             {{> completed-block}}

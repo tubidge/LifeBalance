@@ -1,6 +1,5 @@
 {{#each Tasks}}
-{{#unless completed}} 
-{{!-- changed status to completed so that is will update the task on the display page --}}
+{{#unless completed}}
 <li class="todo-item collection-item" data-category="{{SelectionId}}" data-id="{{id}}">
   <input name="{{id}}" type="checkbox" onclick="play()" />
   <lable for="{{id}}">{{task}}</lable>

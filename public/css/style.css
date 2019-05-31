@@ -35,13 +35,20 @@ h5,
 /* Login/Signup */
 
 .login .collection {
-  max-height: 400px;
-  min-height: 270px;
-  height: 50vh;
+  /* max-height: 450px; */
+  /* min-height: 270px; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding-bottom: 2rem
+}
+
+.login .collection form {
+  margin-top: 3rem;
+}
+
+.login .btn {
+  margin-top: 2rem;
 }
 
 .login .btn, 
@@ -54,6 +61,8 @@ h5,
   background-color: #f1f2f1
 }
 
+
+/* Cards */
 .category .collection-header,
 .btn-floating.btn-large {
   background-color: #80ab49;

@@ -1,54 +1,38 @@
-var db = require("../models");
+var authController = require("../controllers/authcontroller.js");
 
-// dont touch code below here 
-module.exports = function (app) {
+module.exports = function (app, passport) {
 
-  // Homepage
-  app.get("/", function (req, res) {
+  app.get("/signup", authController.signup);
 
-    // console.log("log from route");
-    // console.log(req.session);
+  app.get("/signin", authController.signin);
 
-    db.Selection.findAll({
-      include: [{
-        model: db.Task,
-        where: {
-          UserId: req.session.passport.user
-        },
-        required: false
-      }]
-    }).then(function (dataSelect) {
-      // console.log(dataSelect);
-      var viewObj = {
-        Selection: dataSelect
-      };
+  app.post("/signup", passport.authenticate("local-signup", {
+    successRedirect: "/",
 
-      res.render("index", viewObj);
-
-    });
-  });
+    failureRedirect: "/signup"
+  }
+  ));
 
 
-  // Signup
-  // app.get("/signup", function (req, res) {
-  //   res.render("signup");
-  // });
+  app.get("/", isLoggedIn, authController.dashboard);
 
-  // app.post("/signup", function (req, res) {
-  //   console.log(req.body);
+  app.get("/logout", authController.logout);
 
-  //   db.User.create(req.body).then(function (userData) {
-  //     res.json(userData);
-  //     console.log(userData);
+  app.post("/signin", passport.authenticate("local-signin", {
+    successRedirect: "/",
 
-  //   });
-  // });
+    failureRedirect: "/signin"
+  }
+  ));
 
-  // // Login
-  // app.get("/login", function (req, res) {
-  //   res.render("login");
-  // });
 
+  function isLoggedIn(req, res, next) {
+
+    if (req.isAuthenticated()) { return next(); }
+
+    res.redirect("/signin");
+
+  }
 
   // Render 404 page for any unmatched routes
   app.get("*", function (req, res) {
@@ -56,3 +40,8 @@ module.exports = function (app) {
   });
 
 };
+
+
+
+
+
