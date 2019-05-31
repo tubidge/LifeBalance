@@ -324,7 +324,7 @@ $(document).ready(function () {
         var category = header.attr("data-category");
         var color = rankMap[category];
         header.css("background-color", color);
-        btn.css("background-color", color);
+        btn.css("background-color", color); 
 
       });
     } else {
