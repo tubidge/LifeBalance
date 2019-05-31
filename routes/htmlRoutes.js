@@ -1,5 +1,6 @@
 var db = require("../models");
 
+// dont touch code below here 
 module.exports = function (app) {
 
   // Homepage
