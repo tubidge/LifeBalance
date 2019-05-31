@@ -1,9 +1,8 @@
 {{!-- if user is logged in display nav bar --}}
-{{!-- {{#if active}} --}}
+{{#if User}}
 <nav>
   <div class="nav-wrapper z-depth-2 grey darken-1">
     <div class="container">
-      {{!-- <a href="#" class="brand-logo left">Logo</a> --}}
       <a href="#" data-target="slide-out" class="sidenav-trigger brand-logo left"><i class="material-icons">menu</i></a>
       <ul id="" class="right hide-on-med-and-down">
         <li><a href="/logout">Logout</a></li>
@@ -46,4 +45,4 @@
     </li>
   </form>
 </ul>
-{{!-- {{/if}} --}}
+{{/if}}

@@ -1,4 +1,5 @@
 var exports = module.exports = {};
+var db = require("../models");
 
 exports.signup = function (req, res) {
   res.render("signup");
@@ -26,6 +27,7 @@ exports.dashboard = function (req, res) {
   }).then(function (dataSelect) {
     console.log(dataSelect);
     var viewObj = {
+      User: req.session.passport.user,
       Selection: dataSelect
     };
 
