@@ -1,4 +1,5 @@
 var exports = module.exports = {};
+var db = require("../models");
 
 exports.signup = function (req, res) {
   res.render("signup");
