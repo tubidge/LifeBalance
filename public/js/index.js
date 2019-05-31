@@ -195,9 +195,8 @@ $(document).ready(function () {
         }
       }).then(function () {
         console.log("Task completed.");
-        console.log(currentTodo, checked);
-        // location.reload();
         colorChange();
+        location.reload();
       });
     }
   }
