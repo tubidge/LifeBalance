@@ -13,29 +13,33 @@ exports.signin = function (req, res) {
 
 exports.dashboard = function (req, res) {
 
-  console.log("log from route");
-  console.log(req.session);
+  db.User.findOne({
+    where: {
+      id: req.user
+    }
+  }).then(function (dataUser) {
+    // console.log(dataUser);
 
-  db.Selection.findAll({
-    include: [{
-      model: db.Task,
-      where: {
-        UserId: req.session.passport.user
-      },
-      required: false
-    }]
-  }).then(function (dataSelect) {
-    console.log(dataSelect);
-    var viewObj = {
-      User: req.session.passport.user,
-      Selection: dataSelect
-    };
+    db.Selection.findAll({
+      include: [{
+        model: db.Task,
+        where: {
+          UserId: req.user
+        },
+        required: false
+      }]
+    }).then(function (dataSelect) {
 
-    res.render("index", viewObj);
+      var viewObj = {
+        User: dataUser,
+        Selection: dataSelect
+      };
 
+      res.render("index", viewObj);
+
+    });
   });
 };
-
 
 exports.logout = function (req, res) {
   req.session.destroy(function (err) {
