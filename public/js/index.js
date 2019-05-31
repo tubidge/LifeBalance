@@ -94,8 +94,7 @@ $(document).ready(function () {
       $(".new-task").submit();
       var data = {
         task: $(this).val().trim(),
-        SelectionId: $(this).data("category"),
-        UserId: 1
+        SelectionId: $(this).data("category")
       };
       // making ajax request with new task data
       $.ajax({
@@ -135,7 +134,6 @@ $(document).ready(function () {
       $(this).children("lable").text(text);
       console.log(updatedTodo);
       console.log(text);
-
       $.ajax({
         url: ("/api/todos/:id"),
         method: "PUT",
@@ -161,11 +159,6 @@ $(document).ready(function () {
       $(this).children("input.edit").val(currentTodo.text);
       $(this).children("lable").show();
       $(this).children("input[type='checkbox']").show();
-=======
-      
-    
-    
-
     }
     $(this).closest("li").removeClass("edit-input");
   }

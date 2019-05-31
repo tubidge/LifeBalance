@@ -11,12 +11,13 @@ module.exports = function (app) {
     db.Selection.findAll({
       include: [{
         model: db.Task,
-        // where: {
-        //   UserId: req.session.passport.user
-        // },
+        where: {
+          UserId: req.session.passport.user
+        },
+        required: false
       }]
     }).then(function (dataSelect) {
-
+      console.log(dataSelect);
       var viewObj = {
         Selection: dataSelect
       };
