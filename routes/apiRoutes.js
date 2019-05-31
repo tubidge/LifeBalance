@@ -45,7 +45,6 @@ module.exports = function (app) {
       });
   });
 
-
   //delete the task from the list, different from update completion
   app.delete("/api/todos/:id", function (req, res) {
     db.Task.destroy({ where: { id: req.params.id } }).then(function (data) {

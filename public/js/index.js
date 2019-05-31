@@ -136,7 +136,6 @@ $(document).ready(function () {
       $(this).children("lable").text(text);
       console.log(updatedTodo);
       console.log(text);
-<<<<<<< HEAD
       $.ajax({
         url: ("/api/todos/:id"),
         method: "PUT",
@@ -161,11 +160,6 @@ $(document).ready(function () {
       $(this).children("input.edit").val(currentTodo.text);
       $(this).children("lable").show();
       $(this).children("input[type='checkbox']").show();
-=======
-      
-    
-    
->>>>>>> f1340e7d46b9ca352becc0aeb6b3bb817b10c482
     }
     $(this).closest("li").removeClass("edit-input");
   }
