@@ -27,6 +27,8 @@ module.exports = function (app) {
     });
   });
 
+  // color test
+ 
 
   // Signup
   // app.get("/signup", function (req, res) {

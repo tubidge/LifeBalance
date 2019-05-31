@@ -33,6 +33,8 @@ require("./routes/auth")(app, passport);
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 require("./routes/seed")(app);
+// test
+require("./color_changes")(app);
 
 
 //load passport strategies
