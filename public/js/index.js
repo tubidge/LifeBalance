@@ -161,6 +161,11 @@ $(document).ready(function () {
       $(this).children("input.edit").val(currentTodo.text);
       $(this).children("lable").show();
       $(this).children("input[type='checkbox']").show();
+=======
+      
+    
+    
+
     }
     $(this).closest("li").removeClass("edit-input");
   }
