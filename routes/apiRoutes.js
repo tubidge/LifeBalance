@@ -8,19 +8,6 @@ module.exports = function (app) {
     });
   });
 
-  // // Create a new example
-  // app.post("/api/examples", function (req, res) {
-  //   db.Example.create(req.body).then(function (dbExample) {
-  //     res.json(dbExample);
-  //   });
-  // });
-
-  // // Delete an example by id
-  // app.delete("/api/examples/:id", function (req, res) {
-  //   db.Example.destroy({ where: { id: req.params.id } }).then(function (dbExample) {
-  //     res.json(dbExample);
-  //   });
-  // });
 
   // =====================================================
 
@@ -65,21 +52,14 @@ module.exports = function (app) {
   // =====================================================
 
   app.put("/api/selection/:id", function (req, res) {
-    console.log(req.body.previous);
 
     db.Selection.update({ active: req.body.active }, {
 
       where: { id: req.body.id }
-    }).then(function () {
+    }).then(function (result) {
+      res.json(result);
+      console.log("updated active");
 
-      db.Selection.update({ active: req.body.prevActive }, {
-
-        where: { id: req.body.prevId }
-      }).then(function (result) {
-        res.json(result);
-        console.log("updated active");
-
-      });
     });
   });
 };
