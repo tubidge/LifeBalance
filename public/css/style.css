@@ -163,3 +163,10 @@ input[type=password]:focus {
 .collection {
   border: none;
 }
+
+.collection-header,
+.new-task-btn {
+    transition: background 1.2s linear;
+    -webkit-transition: background 1.2s linear;
+    -moz-transition: background 1.2s linear;
+}

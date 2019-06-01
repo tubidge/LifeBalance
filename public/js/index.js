@@ -3,6 +3,7 @@ $(document).ready(function () {
   selectOnLoad();
   colorChange();
 
+
   $(document).on("click", ".sidenav-trigger", limitCategory);
   $(document).on("change", ".category-checkbox", limitCategory);
   $(document).on("submit", ".category-form", updateCategory);
@@ -194,9 +195,8 @@ $(document).ready(function () {
         }
       }).then(function () {
         console.log("Task completed.");
-        console.log(currentTodo, checked);
-        // location.reload();
         colorChange();
+        location.reload();
       });
     }
   }
@@ -211,7 +211,7 @@ $(document).ready(function () {
   }
 
 
-
+  // ===== Color Change Code =====
 
   function bubbleSort(countArray) {
     var swapp;
@@ -308,22 +308,27 @@ $(document).ready(function () {
   function colorChange() {
     // find all tasks
     var tasks = $(".todo-item");
-    // pass them into generate rank map
-    var rankMap = generateRankMap(tasks);
-    // use rank map to set backgroud style on category-headers
-    var categoryHeaders = $(".collection-header");
-    // added button class
-    var newTaskBtn = $(".new-task-btn");
 
-    categoryHeaders.each(function (index) {
-      var header = $(categoryHeaders[index]);
-      var btn = $(newTaskBtn[index]);
-      var category = header.attr("data-category");
-      var color = rankMap[category];
-      header.css("background-color", color);
-      btn.css("background-color", color);
-    });
+    if (tasks.length) {
+
+      // pass them into generate rank map
+      var rankMap = generateRankMap(tasks);
+      // use rank map to set backgroud style on category-headers
+      var categoryHeaders = $(".collection-header");
+      // added button class
+      var newTaskBtn = $(".new-task-btn");
+
+      categoryHeaders.each(function (index) {
+        var header = $(categoryHeaders[index]);
+        var btn = $(newTaskBtn[index]);
+        var category = header.attr("data-category");
+        var color = rankMap[category];
+        header.css("background-color", color);
+        btn.css("background-color", color); 
+
+      });
+    } else {
+      return;
+    }
   }
-
-
 });
